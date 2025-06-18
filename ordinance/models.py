@@ -10,7 +10,7 @@ from wagtail.snippets.models import register_snippet
 User = get_user_model()
 
 
-class CouncilMeetingIndexPage(Page):
+class OrdinanceIndexPage(Page):
     body = RichTextField("Contenu")
 
     content_panels = Page.content_panels + [
@@ -21,43 +21,55 @@ class CouncilMeetingIndexPage(Page):
     
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        meetings = CouncilMeeting.objects.all().order_by('-date')
-        
-        paginator = Paginator(meetings, 10)
+        ordinances = Ordinance.objects.all().order_by('-date')
+
+        paginator = Paginator(ordinances, 10)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-        
-        context['meetings'] = page_obj
+
+        context['ordinances'] = page_obj  # C'est un objet Page, pas une liste
         return context
 
 
 @register_snippet
-class CouncilMeeting(models.Model):
-    date = models.DateField("Date de la réunion")
+class Ordinance(models.Model):
+    
+    class Type(models.TextChoices):
+        MUNICIPAL = 'municipal', 'Municipal'
+        PREFECTORAL = 'prefectural', 'Préfectoral'
+    
+    date = models.DateField("Date de l'arrêté")
     document = models.ForeignKey(
         'wagtaildocs.Document',
         on_delete=models.CASCADE,
         related_name='+',
-        verbose_name="Compte rendu de la réunion",
+        verbose_name="Compte rendu de l'arrêté",
     )
     author = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
-        related_name='council_meetings',
+        related_name='ordinances',
         verbose_name="Auteur",
         null=True
+    )
+    type = models.CharField(
+        "Type d'arrêté",
+        max_length=20,
+        choices=Type,
+        default=Type.MUNICIPAL,
     )
 
     panels = [
         FieldPanel("date"),
         FieldPanel("document"),
         FieldPanel("author"),
+        FieldPanel("type"),
     ]
     
     class Meta:
-        verbose_name = "Réunion du conseil municipal"
-        verbose_name_plural = "Réunions du conseil municipal"
+        verbose_name = "Arrêté"
+        verbose_name_plural = "Arrêtés"
         ordering = ['-date']
     
     def __str__(self):
-        return f"Réunion du {self.date.strftime('%d/%m/%Y')}"
+        return f"Arrêté du {self.date.strftime('%d/%m/%Y')}"
