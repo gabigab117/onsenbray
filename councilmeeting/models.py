@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.core.paginator import Paginator
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField
@@ -22,7 +23,13 @@ class CouncilMeetingIndexPage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         meetings = CouncilMeeting.objects.all().order_by('-date')
-        context['meetings'] = meetings
+        
+        paginator = Paginator(meetings, 10)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        
+        context['meetings'] = page_obj
+        context['paginator'] = paginator
         return context
 
 
