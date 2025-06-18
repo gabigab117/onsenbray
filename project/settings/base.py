@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "theme",
     "account",
     "core",
+    "councilmeeting",
 ]
 
 MIDDLEWARE = [
