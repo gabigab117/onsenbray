@@ -1,0 +1,33 @@
+img.full-width {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+img.right {
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+  max-width: 50%;
+  height: auto;
+  float: right;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
+img.left {
+  display: block;
+  margin-left: 0;
+  margin-right: auto;
+  max-width: 50%;
+  height: auto;
+/**
+ * Fait flotter l'élément à gauche du conteneur.
+ * Le texte ou les éléments adjacents s'enroulent automatiquement autour.
+ */
+  float: left; 
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
