@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     "ordinance",
     "hooks",
     "news",
+    "event",
 ]
 
 MIDDLEWARE = [
