@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "core",
     "councilmeeting",
     "ordinance",
+    "hooks",
 ]
 
 MIDDLEWARE = [

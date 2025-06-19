@@ -4,7 +4,6 @@ from django.core.paginator import Paginator
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField
-from wagtail.snippets.models import register_snippet
 
 
 User = get_user_model()
@@ -31,7 +30,6 @@ class OrdinanceIndexPage(Page):
         return context
 
 
-@register_snippet
 class Ordinance(models.Model):
     
     class Type(models.TextChoices):
@@ -43,7 +41,7 @@ class Ordinance(models.Model):
         'wagtaildocs.Document',
         on_delete=models.CASCADE,
         related_name='+',
-        verbose_name="Compte rendu de l'arrêté",
+        verbose_name="Arrêté",
     )
     author = models.ForeignKey(
         User,
@@ -58,13 +56,6 @@ class Ordinance(models.Model):
         choices=Type,
         default=Type.MUNICIPAL,
     )
-
-    panels = [
-        FieldPanel("date"),
-        FieldPanel("document"),
-        FieldPanel("author"),
-        FieldPanel("type"),
-    ]
     
     class Meta:
         verbose_name = "Arrêté"

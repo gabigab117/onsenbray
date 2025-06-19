@@ -4,7 +4,6 @@ from django.core.paginator import Paginator
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField
-from wagtail.snippets.models import register_snippet
 
 
 User = get_user_model()
@@ -31,7 +30,6 @@ class CouncilMeetingIndexPage(Page):
         return context
 
 
-@register_snippet
 class CouncilMeeting(models.Model):
     date = models.DateField("Date de la réunion")
     document = models.ForeignKey(
@@ -47,12 +45,6 @@ class CouncilMeeting(models.Model):
         verbose_name="Auteur",
         null=True
     )
-
-    panels = [
-        FieldPanel("date"),
-        FieldPanel("document"),
-        FieldPanel("author"),
-    ]
     
     class Meta:
         verbose_name = "Réunion du conseil municipal"
