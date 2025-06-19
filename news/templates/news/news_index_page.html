@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+<!-- Contenu principal de la page -->
+<div class="prose-lg mx-auto my-8 text-center">
+    {{ page.body|richtext }}
+</div>
+
+<!-- Section des arrêtés -->
+{% if news_items %}
+<div class="mt-12">
+    <div class="text-center mb-8">
+        <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+        {% for news_item in news_items %}
+        <div class="card bg-white shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200">
+            <div class="card-body p-6">
+                <!-- En-tête de la card avec icône -->
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
+                            </svg>
+
+                        </div>
+                        <div>
+                            <p>Article du : </p>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <!-- Informations de l'article -->
+                <div class="space-y-2 mb-4">
+                    <div class="flex items-center text-sm text-gray-600">
+                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="font-medium">{{ news_item.specific.date|date:"d/m/Y" }}</span>
+                    </div>
+            
+                    
+                    <div class="flex items-center text-sm text-gray-600">
+                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Publié par {{ news_item.owner.first_name }}</span>
+
+                    </div>
+                </div>
+                
+                <!-- Action -->
+                <div class="card-actions justify-end mt-4">
+                    <a href="{% pageurl news_item %}" class="btn btn-primary btn-sm">
+                        {{ news_item.title }}
+                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if news_items.has_other_pages %}
+    <div class="flex justify-center mt-12">
+        <nav class="flex items-center space-x-2">
+            {% if news_items.has_previous %}
+                <a href="?page=1" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
+                    Première
+                </a>
+                <a href="?page={{ news_items.previous_page_number }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
+                    ‹ Précédente
+                </a>
+            {% endif %}
+
+            {% for num in news_items.paginator.page_range %}
+                {% if news_items.number == num %}
+                    <span class="px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded-md">
+                        {{ num }}
+                    </span>
+                {% elif num > news_items.number|add:'-3' and num < news_items.number|add:'3' %}
+                    <a href="?page={{ num }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
+                        {{ num }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+
+            {% if news_items.has_next %}
+                <a href="?page={{ news_items.next_page_number }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
+                    Suivante ›
+                </a>
+                <a href="?page={{ news_items.paginator.num_pages }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
+                    Dernière
+                </a>
+            {% endif %}
+        </nav>
+    </div>
+
+    <!-- Informations de pagination -->
+    <div class="text-center mt-4 text-sm text-gray-600">
+        Page {{ news_items.number }} sur {{ news_items.paginator.num_pages }} 
+        ({{ news_items.paginator.count }} article{{ news_items.paginator.count|pluralize }} au total)
+    </div>
+    {% endif %}
+
+</div>
+{% endif %}
+
+{% endblock content %}

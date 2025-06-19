@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+<div class="max-w-4xl mx-auto">
+    <div class="card bg-white shadow-lg border border-gray-100">
+        <div class="card-body p-8">
+            
+            <!-- Métadonnées de l'article -->
+            <div class="text-center mb-8 pb-6 border-b border-gray-200">
+                <div class="text-sm text-gray-600 mb-2">
+                    {{ page.date|date:"d/m/Y" }}
+                </div>
+                <div class="text-sm text-gray-600">
+                    {{ page.owner.first_name }}
+                </div>
+            </div>
+            
+            <!-- Contenu de l'article -->
+            <div class="prose prose-lg max-w-none mx-auto">
+                {{ page.body }}
+            </div>
+            
+            <!-- Lien de retour -->
+            <div class="text-center mt-8 pt-6 border-t border-gray-200">
+                <a href="{{ page.get_parent.url }}" class="btn btn-outline btn-primary">
+                    Retour à la liste des articles
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
