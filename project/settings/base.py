@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     "hooks",
     "news",
     "event",
+    "school",
 ]
 
 MIDDLEWARE = [
