@@ -34,7 +34,7 @@
     <body class="min-h-screen flex flex-col bg-base-100">
         {% wagtailuserbar %}
 
-        <!-- Navbar moderne et imposante -->
+<!-- Navbar moderne et imposante -->
         <header class="bg-white shadow-lg shadow-blue-100 border-blue-600 sticky top-0 z-50">
             <!-- Navigation principale -->
             <nav class="py-4">
@@ -67,28 +67,105 @@
                                 </svg>
                                 Accueil
                             </a>
-                            <a href="/actualites/" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-200 flex items-center">
-                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"/>
-                                </svg>
-                                Actualités
-                            </a>
+                            
+                            <!-- LA MAIRIE -->
                             <div class="dropdown dropdown-hover">
                                 <div tabindex="0" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-200 flex items-center cursor-pointer">
                                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z" clip-rule="evenodd"/>
                                     </svg>
-                                    Services
+                                    La Mairie
                                     <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
                                 <ul tabindex="0" class="dropdown-content z-[1] menu p-3 shadow-xl bg-white rounded-xl w-64 border border-gray-100">
-                                    <li><a href="/demarches/" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Démarches administratives</a></li>
-                                    <li><a href="/urbanisme/" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Urbanisme</a></li>
-                                    <li><a href="/associations/" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Associations</a></li>
+                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">La Mairie</a></li>
+                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Comptes rendu conseils municipaux</a></li>
+                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Arrêtés municipaux</a></li>
+                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Citoyenneté / démarches</a></li>
                                 </ul>
                             </div>
+
+                            <!-- LE VILLAGE -->
+                            <div class="dropdown dropdown-hover">
+                                <div tabindex="0" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-200 flex items-center cursor-pointer">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+                                    </svg>
+                                    Le Village
+                                    <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <ul tabindex="0" class="dropdown-content z-[1] menu p-3 shadow-xl bg-white rounded-xl w-64 border border-gray-100">
+                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Le village</a></li>
+                                    <li><a href="" target="_blank" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">À visiter</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- ACTUALITÉS & ÉVÉNEMENTS -->
+                            <div class="dropdown dropdown-hover">
+                                <div tabindex="0" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-200 flex items-center cursor-pointer">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Actualités & Événements
+                                    <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <ul tabindex="0" class="dropdown-content z-[1] menu p-3 shadow-xl bg-white rounded-xl w-64 border border-gray-100">
+                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Actualités</a></li>
+                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Événements</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- VIE LOCALE -->
+                            <div class="dropdown dropdown-hover">
+                                <div tabindex="0" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-200 flex items-center cursor-pointer">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Vie Locale
+                                    <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <ul tabindex="0" class="dropdown-content z-[1] menu p-3 shadow-xl bg-white rounded-xl w-64 border border-gray-100">
+                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">École</a></li>
+                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Associations</a></li>
+                                    <li><a href="" target="_blank" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Accueil Loisir</a></li>
+                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Location salle</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- SERVICES & INFOS PRATIQUES -->
+                            <div class="dropdown dropdown-hover">
+                                <div tabindex="0" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-200 flex items-center cursor-pointer">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Services & Infos Pratiques
+                                    <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <ul tabindex="0" class="dropdown-content z-[1] menu p-3 shadow-xl bg-white rounded-xl w-64 border border-gray-100">
+                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Médical</a></li>
+                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Artisans</a></li>
+                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Collecte des déchets</a></li>
+                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg">Numéros utiles</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- COMMUNAUTÉ DE COMMUNES (menu simple) -->
+                            <a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-200 flex items-center">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zM3 15a1 1 0 011-1h1a1 1 0 011 1v1a1 1 0 01-1 1H4a1 1 0 01-1-1v-1zm7-1a1 1 0 000 2h6a1 1 0 100-2h-6z" clip-rule="evenodd"/>
+                                </svg>
+                                Communauté de Communes
+                            </a>
 
                         </div>
 
@@ -120,18 +197,71 @@
                                 </div>
                                 <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-xl bg-white rounded-xl w-64 border border-gray-100">
                                     <li><a href="/" class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Accueil</a></li>
-                                    <li><a href="/actualites/" class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Actualités</a></li>
+                                    
+                                    <!-- LA MAIRIE mobile -->
                                     <li>
                                         <details>
-                                            <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Services</summary>
+                                            <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">La Mairie</summary>
                                             <ul class="p-2">
-                                                <li><a href="/demarches/" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Démarches</a></li>
-                                                <li><a href="/urbanisme/" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Urbanisme</a></li>
-                                                <li><a href="/associations/" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Associations</a></li>
+                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">La Mairie</a></li>
+                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Comptes rendu conseils municipaux</a></li>
+                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Arrêtés municipaux</a></li>
+                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Citoyenneté / démarches</a></li>
                                             </ul>
                                         </details>
                                     </li>
-                                    <li><a href="/contact/" class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Contact</a></li>
+
+                                    <!-- LE VILLAGE mobile -->
+                                    <li>
+                                        <details>
+                                            <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Le Village</summary>
+                                            <ul class="p-2">
+                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Le village</a></li>
+                                                <li><a href="" target="_blank" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">À visiter</a></li>
+                                            </ul>
+                                        </details>
+                                    </li>
+
+                                    <!-- ACTUALITÉS & ÉVÉNEMENTS mobile -->
+                                    <li>
+                                        <details>
+                                            <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Actualités & Événements</summary>
+                                            <ul class="p-2">
+                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Actualités</a></li>
+                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Événements</a></li>
+                                            </ul>
+                                        </details>
+                                    </li>
+
+                                    <!-- VIE LOCALE mobile -->
+                                    <li>
+                                        <details>
+                                            <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Vie Locale</summary>
+                                            <ul class="p-2">
+                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">École</a></li>
+                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Associations</a></li>
+                                                <li><a href="" target="_blank" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Accueil Loisir</a></li>
+                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Location salle</a></li>
+                                            </ul>
+                                        </details>
+                                    </li>
+
+                                    <!-- SERVICES & INFOS PRATIQUES mobile -->
+                                    <li>
+                                        <details>
+                                            <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Services & Infos Pratiques</summary>
+                                            <ul class="p-2">
+                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Médical</a></li>
+                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Artisans</a></li>
+                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Collecte des déchets</a></li>
+                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Numéros utiles</a></li>
+                                            </ul>
+                                        </details>
+                                    </li>
+
+                                    <!-- COMMUNAUTÉ DE COMMUNES mobile -->
+                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Communauté de Communes</a></li>
+
                                     <li class="mt-2 pt-2 border-t border-gray-100">
                                         <div class="px-4 py-2">
                                             <input type="text" placeholder="Rechercher..." class="input input-bordered input-sm w-full" />
