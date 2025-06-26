@@ -36,8 +36,6 @@
 
         <!-- Navbar moderne et imposante -->
         <header class="bg-white shadow-lg shadow-blue-100 border-blue-600 sticky top-0 z-50">
-
-
             <!-- Navigation principale -->
             <nav class="py-4">
                 <div class="container mx-auto px-4">
@@ -147,16 +145,35 @@
         <!-- Contenu principal -->
         <main class="container mx-auto px-4 py-8 grow max-w-6xl">
 
-            
-        <!-- Titre de la page -->
-        {% if page and page.title %}
-        <div class="mb-8 text-center">
-            <div class="bg-gray-50 py-6 px-8 rounded-lg">
-                <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ page.title }}</h1>
+            <!-- Titre de la page enrichi -->
+            {% if page.title %}
+            <div class="mb-8 relative overflow-hidden">
+                <!-- Arrière-plan avec dégradé subtil -->
+                <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 py-12 px-8 rounded-xl border border-blue-100 relative">
+                    
+                    <!-- Blason en arrière-plan très subtil -->
+                    <div class="absolute right-8 top-1/2 transform -translate-y-1/2 opacity-5">
+                        <img src="{% static 'assets/Blason_ville_fr_oise_ons_en_bray.svg' %}" alt="" class="w-32 h-32" />
+                    </div>
+                    
+                    <!-- Contenu principal -->
+                    <div class="relative z-10 text-center">
+                        <!-- Ligne décorative avec blason -->
+                        <div class="flex items-center justify-center mb-6">
+                            <div class="w-16 h-0.5 bg-gradient-to-r from-transparent to-blue-300"></div>
+                            <img src="{% static 'assets/Blason_ville_fr_oise_ons_en_bray.svg' %}" alt="Blason Ons-en-Bray" class="w-12 h-12 mx-4" />
+                            <div class="w-16 h-0.5 bg-gradient-to-l from-transparent to-blue-300"></div>
+                        </div>
+                        
+                        <!-- Titre -->
+                        <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ page.title }}</h1>
+                        
+                        <!-- Ligne décorative finale -->
+                        <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                    </div>
+                </div>
             </div>
-        </div>
-        {% endif %}
-
+            {% endif %}
 
             {% block content %}{% endblock %}
         </main>

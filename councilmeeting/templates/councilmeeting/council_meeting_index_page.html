@@ -17,10 +17,11 @@
     
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
         {% for meeting in meetings %}
-        <div class="card bg-white shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200">
-            <div class="card-body p-6">
+        <div class="card bg-white shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200 w-full max-w-sm h-56 flex flex-col">
+            <div class="card-body p-6 flex flex-col h-full">
+
                 <!-- En-tête de la card avec icône -->
-                <div class="flex items-start justify-between mb-4">
+                <div class="flex items-start justify-between mb-4 flex-shrink-0">
                     <div class="flex items-center">
                         <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
                             <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
@@ -28,15 +29,13 @@
                             </svg>
                         </div>
                         <div>
-                            <p>Compte rendu du : </p>
+                            <p class="text-sm text-gray-600">Compte rendu du :</p>
                         </div>
                     </div>
                 </div>
                 
-
-                
-                <!-- Informations de la réunion -->
-                <div class="space-y-2 mb-4">
+                <!-- Informations de la réunion - zone flexible -->
+                <div class="space-y-2 mb-4 flex-grow">
                     <div class="flex items-center text-sm text-gray-600">
                         <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
@@ -56,12 +55,12 @@
                     </div>
                 </div>
                 
-                <!-- Action -->
-                <div class="card-actions justify-end mt-4">
+                <!-- Action - toujours en bas -->
+                <div class="card-actions justify-end mt-auto flex-shrink-0">
                     <a href="{{ meeting.document.url }}" target="_blank" class="btn btn-primary btn-sm">
-                        Ouvrir le compte rendu
+                        Ouvrir
                         <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
                         </svg>
                     </a>
                 </div>
