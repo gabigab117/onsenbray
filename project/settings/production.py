@@ -17,16 +17,16 @@ SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": "pygabdev3",
-#         "USER": "root",
-#         "PASSWORD": env("DB_PASSWORD"),
-#         "HOST": "localhost",
-#         "PORT": "3306",
-#         "OPTIONS": {
-#             "sql_mode": "STRICT_TRANS_TABLES",
-#         },
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "django",
+        "USER": "root",
+        "PASSWORD": env("DB_PASSWORD"),
+        "HOST": "localhost",
+        "PORT": "3306",
+        "OPTIONS": {
+            "sql_mode": "STRICT_TRANS_TABLES",
+        },
+    }
+}
