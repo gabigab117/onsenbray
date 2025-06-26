@@ -7,6 +7,9 @@ import environ
 
 env= environ.Env()
 
+
+environ.Env.read_env(".env")
+
 def main():
     """Run administrative tasks."""
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", env("DJANGO_SETTINGS_MODULE"))
