@@ -31,10 +31,10 @@
         {% block extra_css %}{% endblock %}
     </head>
 
-    <body class="min-h-screen flex flex-col bg-base-100">
+    <body class="min-h-screen flex flex-col bg-gray-50">
         {% wagtailuserbar %}
 
-<!-- Navbar moderne et imposante -->
+        <!-- Navbar moderne et imposante -->
         <header class="bg-white shadow-lg shadow-blue-100 border-blue-600 sticky top-0 z-50">
             <!-- Navigation principale -->
             <nav class="py-4">
@@ -59,7 +59,7 @@
                             </a>
                         </div>
 
-                        <!-- Menu desktop - Changé de lg: à xl: pour switcher plus tôt -->
+                        <!-- Menu desktop -->
                         <div class="hidden xl:flex items-center space-x-1">
                             <a href="/" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-200 flex items-center">
                                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -68,7 +68,7 @@
                                 Accueil
                             </a>
                             
-                            <!-- LA MAIRIE - SVG amélioré -->
+                            <!-- LA MAIRIE -->
                             <div class="dropdown dropdown-hover">
                                 <div tabindex="0" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-200 flex items-center cursor-pointer">
                                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -161,7 +161,7 @@
                                 </ul>
                             </div>
 
-                            <!-- COMMUNAUTÉ DE COMMUNES - SVG amélioré -->
+                            <!-- COMMUNAUTÉ DE COMMUNES -->
                             <a href="" class="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-200 flex items-center">
                                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M2 4a2 2 0 012-2h3a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V4zm2 0v12h3V4H4zm7-2a2 2 0 00-2 2v12a2 2 0 002 2h3a2 2 0 002-2V4a2 2 0 00-2-2h-3zm0 2h3v12h-3V4z"/>
@@ -169,7 +169,6 @@
                                 </svg>
                                 Communauté de Communes
                             </a>
-
                         </div>
 
                         <!-- Recherche et menu mobile -->
@@ -191,7 +190,7 @@
                                 </div>
                             </div>
 
-                            <!-- Menu mobile - Changé de lg: à xl: pour s'afficher plus tôt -->
+                            <!-- Menu mobile -->
                             <div class="dropdown dropdown-end xl:hidden">
                                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -278,44 +277,50 @@
             </nav>
         </header>
 
-        <!-- Contenu principal -->
+        <!-- Contenu principal avec carte blanche -->
         <main class="container mx-auto px-4 py-8 grow max-w-6xl">
-
-            <!-- Titre de la page enrichi -->
-            {% if page.title %}
-            <div class="mb-8 relative overflow-hidden">
-                <!-- Arrière-plan avec dégradé subtil -->
-                <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 py-12 px-8 rounded-xl border border-blue-100 relative">
-                    
-                    <!-- Blason en arrière-plan très subtil -->
-                    <div class="absolute right-8 top-1/2 transform -translate-y-1/2 opacity-5">
-                        <img src="{% static 'assets/Blason_ville_fr_oise_ons_en_bray.svg' %}" alt="" class="w-32 h-32" />
-                    </div>
-                    
-                    <!-- Contenu principal -->
-                    <div class="relative z-10 text-center">
-                        <!-- Ligne décorative avec blason -->
-                        <div class="flex items-center justify-center mb-6">
-                            <div class="w-16 h-0.5 bg-gradient-to-r from-transparent to-blue-300"></div>
-                            <img src="{% static 'assets/Blason_ville_fr_oise_ons_en_bray.svg' %}" alt="Blason Ons-en-Bray" class="w-12 h-12 mx-4" />
-                            <div class="w-16 h-0.5 bg-gradient-to-l from-transparent to-blue-300"></div>
+            <!-- Wrapper avec arrière-plan blanc et ombre subtile -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                
+                <!-- Titre de la page enrichi -->
+                {% if page.title %}
+                <div class="mb-8 relative overflow-hidden">
+                    <!-- Arrière-plan avec dégradé subtil -->
+                    <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 py-12 px-8 border-b border-blue-100 relative">
+                        
+                        <!-- Blason en arrière-plan très subtil -->
+                        <div class="absolute right-8 top-1/2 transform -translate-y-1/2 opacity-5">
+                            <img src="{% static 'assets/Blason_ville_fr_oise_ons_en_bray.svg' %}" alt="" class="w-32 h-32" />
                         </div>
                         
-                        <!-- Titre -->
-                        <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ page.title }}</h1>
-                        
-                        <!-- Ligne décorative finale -->
-                        <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                        <!-- Contenu principal -->
+                        <div class="relative z-10 text-center">
+                            <!-- Ligne décorative avec blason -->
+                            <div class="flex items-center justify-center mb-6">
+                                <div class="w-16 h-0.5 bg-gradient-to-r from-transparent to-blue-300"></div>
+                                <img src="{% static 'assets/Blason_ville_fr_oise_ons_en_bray.svg' %}" alt="Blason Ons-en-Bray" class="w-12 h-12 mx-4" />
+                                <div class="w-16 h-0.5 bg-gradient-to-l from-transparent to-blue-300"></div>
+                            </div>
+                            
+                            <!-- Titre -->
+                            <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ page.title }}</h1>
+                            
+                            <!-- Ligne décorative finale -->
+                            <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            {% endif %}
+                {% endif %}
 
-            {% block content %}{% endblock %}
+                <!-- Zone de contenu avec padding -->
+                <div class="p-8">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
         </main>
 
         <!-- Footer moderne et équilibré -->
-        <footer class="bg-gray-50 border-t border-gray-200">
+        <footer class="bg-white border-t border-gray-200 mt-8">
             <!-- Section principale -->
             <div class="container mx-auto px-4 py-12">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -335,7 +340,6 @@
                             Commune située dans le département de l'Oise, en région Hauts-de-France. 
                             Un village riche en son passé, vivant avec son temps.
                         </p>
-
                     </div>
 
                     <!-- Contact -->
@@ -407,7 +411,7 @@
             </div>
 
             <!-- Section inférieure -->
-            <div class="border-t border-gray-200 bg-white">
+            <div class="border-t border-gray-200 bg-gray-50">
                 <div class="container mx-auto px-4 py-6">
                     <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                         <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-gray-600">
