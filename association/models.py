@@ -27,7 +27,7 @@ class AssociationIndexPage(Page):
 
 
 class AssociationPage(Page):
-    summary = RichTextField("Résumé", max_length=255, help_text="Bref résumé de l'association")
+    summary = RichTextField("Résumé", max_length=170, help_text="Bref résumé de l'association")
     body = StreamField([
         ('text', RichTextBlock()),
         ('image', ImageChooserBlock()),

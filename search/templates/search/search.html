@@ -3,36 +3,134 @@
 
 {% block body_class %}template-searchresults{% endblock %}
 
-{% block title %}Search{% endblock %}
+{% block title %}Recherche{% endblock %}
 
 {% block content %}
-<h1>Search</h1>
 
-<form action="{% url 'search' %}" method="get">
-    <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-    <input type="submit" value="Search" class="button">
-</form>
+<!-- Section titre enrichie -->
+<div class="mb-8 relative overflow-hidden">
+    <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 py-12 px-8 rounded-xl border border-blue-100 relative">
+        <!-- Blason en arrière-plan très subtil -->
+        <div class="absolute right-8 top-1/2 transform -translate-y-1/2 opacity-5">
+            <img src="{% static 'assets/Blason_ville_fr_oise_ons_en_bray.svg' %}" alt="" class="w-32 h-32" />
+        </div>
+        
+        <!-- Contenu principal -->
+        <div class="relative z-10 text-center">
+            <!-- Ligne décorative avec icône -->
+            <div class="flex items-center justify-center mb-6">
+                <div class="w-16 h-0.5 bg-gradient-to-r from-transparent to-blue-300"></div>
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-4">
+                    <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="w-16 h-0.5 bg-gradient-to-l from-transparent to-blue-300"></div>
+            </div>
+            
+            <!-- Titre -->
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Recherche</h1>
+            
+            <!-- Ligne décorative finale -->
+            <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+        </div>
+    </div>
+</div>
 
+<!-- Résultats de recherche -->
 {% if search_results %}
-<ul>
-    {% for result in search_results %}
-    <li>
-        <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
-        {% if result.search_description %}
-        {{ result.search_description }}
-        {% endif %}
-    </li>
-    {% endfor %}
-</ul>
+<div class="mb-8">
+    <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold text-gray-900">
+            Résultats de recherche
+            {% if search_query %}
+            <span class="text-lg font-normal text-gray-600">pour "{{ search_query }}"</span>
+            {% endif %}
+        </h2>
+        <div class="text-sm text-gray-500">
+            {{ search_results.paginator.count }} résultat{{ search_results.paginator.count|pluralize }}
+        </div>
+    </div>
 
-{% if search_results.has_previous %}
-<a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
-{% endif %}
+    <!-- Liste des résultats -->
+    <div class="space-y-4">
+        {% for result in search_results %}
+        <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow duration-200">
+            <div class="flex items-start justify-between">
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                        <a href="{% pageurl result %}" class="hover:text-blue-600 transition-colors duration-200">
+                            {{ result }}
+                        </a>
+                    </h3>
+                    {% if result.search_description %}
+                    <p class="text-gray-600 leading-relaxed">
+                        {{ result.search_description }}
+                    </p>
+                    {% endif %}
+                </div>
+                <div class="ml-4 flex-shrink-0">
+                    <a href="{% pageurl result %}" class="inline-flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium">
+                        Voir
+                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 
-{% if search_results.has_next %}
-<a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
-{% endif %}
+    <!-- Pagination -->
+    {% if search_results.has_other_pages %}
+    <div class="flex justify-center mt-12">
+        <nav class="flex items-center space-x-2">
+            {% if search_results.has_previous %}
+                <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}" 
+                   class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors duration-200">
+                    ‹ Précédent
+                </a>
+            {% endif %}
+
+            <span class="px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded-md">
+                Page {{ search_results.number }}
+            </span>
+
+            {% if search_results.has_next %}
+                <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}" 
+                   class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors duration-200">
+                    Suivant ›
+                </a>
+            {% endif %}
+        </nav>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Message aucun résultat -->
 {% elif search_query %}
-No results found
+<div class="text-center py-12">
+    <div class="max-w-md mx-auto">
+        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+            </svg>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-900 mb-2">Aucun résultat trouvé</h2>
+        <p class="text-gray-600 mb-6">
+            Aucun résultat pour "{{ search_query }}". Essayez avec d'autres mots-clés.
+        </p>
+        <div class="text-sm text-gray-500">
+            <p class="mb-2">Suggestions :</p>
+            <ul class="space-y-1">
+                <li>• Vérifiez l'orthographe</li>
+                <li>• Utilisez des mots-clés plus généraux</li>
+                <li>• Essayez des synonymes</li>
+            </ul>
+        </div>
+    </div>
+</div>
 {% endif %}
+
 {% endblock %}

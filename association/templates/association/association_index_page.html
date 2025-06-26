@@ -21,9 +21,9 @@
             <div class="card-body p-6 flex flex-col h-full">
                 <!-- Titre en haut de la card -->
                 <div class="mb-4 flex-shrink-0">
-                    <h3 class="text-lg font-bold text-gray-900 line-clamp-3 leading-tight">
+                    <h2 class="text-lg font-bold text-gray-900 line-clamp-3 leading-tight">
                         {{ association.title }}
-                    </h3>
+                    </h2>
                 </div>
 
                 <!-- En-tête de la card avec icône -->
@@ -45,9 +45,8 @@
                     <!-- Résumé de l'association -->
                     {% if association.summary %}
                     <div class="text-sm text-gray-700 leading-relaxed">
-                        <div class="line-clamp-4">
-                            {{ association.summary|richtext|striptags }}
-                        </div>
+                            {{ association.summary|richtext }}
+                     
                     </div>
                     {% else %}
                     <div class="flex items-center text-sm text-gray-500 italic">
