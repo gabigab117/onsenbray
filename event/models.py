@@ -7,6 +7,7 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.fields import StreamField
 from wagtail.search import index
+from wagtail.snippets.models import register_snippet
 from django.core.paginator import Paginator
 
 
@@ -52,6 +53,13 @@ class EventPage(Page):
         ('image', ImageChooserBlock()),
         ('document', DocumentChooserBlock()),
     ], use_json_field=True, blank=True)
+    organizer = models.ForeignKey(
+        'Organizer',
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='events',
+        verbose_name="Organisateur"
+    )
     
     search_fields = Page.search_fields + [
         index.SearchField('body'),
@@ -62,6 +70,18 @@ class EventPage(Page):
         FieldPanel("localisation"),
         FieldPanel("body"),
         FieldPanel("event_type"),
+        FieldPanel("organizer"),
     ]
     
     parent_page_types = ['event.EventIndexPage']
+
+
+@register_snippet
+class Organizer(models.Model):
+    name = models.CharField("Nom de l'organisateur", max_length=255)
+    
+    class Meta:
+        verbose_name = "Organisateur"
+    
+    def __str__(self):
+        return self.name

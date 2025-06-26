@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+<!-- Contenu principal de la page -->
+<div class="prose-lg mx-auto my-8 text-center">
+    {{ page.body|richtext }}
+</div>
+
+<!-- Section des associations -->
+{% if associations %}
+<div class="mt-12">
+    <div class="text-center mb-8">
+        <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+        {% for association in associations %}
+        <div class="card bg-white shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200 w-full max-w-sm h-80 flex flex-col">
+            <div class="card-body p-6 flex flex-col h-full">
+                <!-- Titre en haut de la card -->
+                <div class="mb-4 flex-shrink-0">
+                    <h3 class="text-lg font-bold text-gray-900 line-clamp-3 leading-tight">
+                        {{ association.title }}
+                    </h3>
+                </div>
+
+                <!-- En-tête de la card avec icône -->
+                <div class="flex items-start justify-between mb-4 flex-shrink-0">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">Association :</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Informations de l'association - zone flexible -->
+                <div class="space-y-2 mb-4 flex-grow">
+                    <!-- Résumé de l'association -->
+                    {% if association.summary %}
+                    <div class="text-sm text-gray-700 leading-relaxed">
+                        <div class="line-clamp-4">
+                            {{ association.summary|richtext|striptags }}
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="flex items-center text-sm text-gray-500 italic">
+                        <svg class="w-4 h-4 mr-2 text-gray-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Aucune description disponible</span>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Action - toujours en bas -->
+                <div class="card-actions justify-end mt-auto flex-shrink-0">
+                    <a href="{% pageurl association %}" class="btn btn-primary btn-sm">
+                        Découvrir
+                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Message si aucune association -->
+    {% else %}
+    <div class="text-center py-12">
+        <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full mb-8"></div>
+        <div class="max-w-md mx-auto">
+            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+                </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Aucune association</h3>
+            <p class="text-gray-600">Les associations de la commune seront bientôt disponibles ici.</p>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock content %}
