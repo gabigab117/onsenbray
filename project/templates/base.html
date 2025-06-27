@@ -58,11 +58,7 @@
                         </div>
 
                         <!-- Menu desktop épuré - SANS ICÔNES -->
-                        <div class="hidden xl:flex items-center space-x-8">
-                            <a href="/" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2 border-b-2 border-transparent hover:border-blue-600">
-                                Accueil
-                            </a>
-                            
+ 
                             <!-- LA MAIRIE - Menu simple au hover -->
                             <div class="relative group">
                                 <button class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2 border-b-2 border-transparent group-hover:border-blue-600 flex items-center">
@@ -74,10 +70,10 @@
                                 <!-- Dropdown au hover -->
                                 <div class="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                                     <div class="py-2">
-                                        <a href="" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">La Mairie</a>
-                                        <a href="" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Comptes rendu conseils municipaux</a>
-                                        <a href="" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Arrêtés municipaux</a>
-                                        <a href="" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Citoyenneté / démarches</a>
+                                        <a href="{% slugurl 'la-mairie' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">La Mairie</a>
+                                        <a href="{% slugurl 'comptes-rendus-des-conseils-municipaux' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Comptes rendu conseils municipaux</a>
+                                        <a href="{% slugurl 'arretes-municipaux-et-prefectoraux' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Arrêtés municipaux</a>
+                                        <a href="{% slugurl 'citoyennete-et-demarches' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Citoyenneté / démarches</a>
                                     </div>
                                 </div>
                             </div>
@@ -92,8 +88,8 @@
                                 </button>
                                 <div class="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                                     <div class="py-2">
-                                        <a href="" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Le village</a>
-                                        <a href="" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">À visiter</a>
+                                        <a href="{% slugurl 'le-village' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Le village</a>
+                                        <a href="https://www.ot-paysdebray.fr/fr/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">À visiter</a>
                                     </div>
                                 </div>
                             </div>
@@ -108,8 +104,8 @@
                                 </button>
                                 <div class="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                                     <div class="py-2">
-                                        <a href="" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Actualités</a>
-                                        <a href="" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Événements</a>
+                                        <a href="{% slugurl 'actualites' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Actualités</a>
+                                        <a href="{% slugurl 'evenements' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Événements</a>
                                     </div>
                                 </div>
                             </div>
@@ -124,10 +120,10 @@
                                 </button>
                                 <div class="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                                     <div class="py-2">
-                                        <a href="" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">École</a>
-                                        <a href="" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Associations</a>
-                                        <a href="" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Accueil Loisir</a>
-                                        <a href="" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Location salle</a>
+                                        <a href="{% slugurl 'ecole' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">École</a>
+                                        <a href="{% slugurl 'associations' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Associations</a>
+                                        <a href="https://espacefamille.aiga.fr/index.html?dossier=11698905#connexion&152640" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Accueil Loisir</a>
+                                        <a href="{% slugurl 'location-des-salles' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Location des salles</a>
                                     </div>
                                 </div>
                             </div>
@@ -142,16 +138,16 @@
                                 </button>
                                 <div class="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                                     <div class="py-2">
-                                        <a href="" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Médical</a>
-                                        <a href="" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Artisans</a>
-                                        <a href="" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Collecte des déchets</a>
-                                        <a href="" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Numéros utiles</a>
+                                        <a href="{% slugurl 'medical' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Médical</a>
+                                        <a href="{% slugurl 'artisans' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Artisans</a>
+                                        <a href="{% slugurl 'collecte-des-dechets' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Collecte des déchets</a>
+                                        <a href="{% slugurl 'numeros-utiles' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Numéros utiles</a>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- COMMUNAUTÉ DE COMMUNES - Lien simple -->
-                            <a href="" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2 border-b-2 border-transparent hover:border-blue-600">
+                            <a href="https://cc-paysdebray.com/" target="_blank" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2 border-b-2 border-transparent hover:border-blue-600">
                                 Communauté de Communes
                             </a>
                         </div>
@@ -183,17 +179,16 @@
                                     </svg>
                                 </div>
                                 <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-xl bg-white rounded-xl w-64 border border-gray-100">
-                                    <li><a href="/" class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Accueil</a></li>
                                     
                                     <!-- LA MAIRIE mobile -->
                                     <li>
                                         <details>
                                             <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Mairie</summary>
                                             <ul class="p-2">
-                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">La Mairie</a></li>
-                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Comptes rendu conseils municipaux</a></li>
-                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Arrêtés municipaux</a></li>
-                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Citoyenneté / démarches</a></li>
+                                                <li><a href="{% slugurl 'la-mairie' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">La Mairie</a></li>
+                                                <li><a href="{% slugurl 'comptes-rendu-conseils-municipaux' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Comptes rendu conseils municipaux</a></li>
+                                                <li><a href="{% slugurl 'arretes-municipaux' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Arrêtés municipaux</a></li>
+                                                <li><a href="{% slugurl 'citoyennete-et-demarches' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Citoyenneté / démarches</a></li>
                                             </ul>
                                         </details>
                                     </li>
@@ -203,8 +198,8 @@
                                         <details>
                                             <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Village</summary>
                                             <ul class="p-2">
-                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Le village</a></li>
-                                                <li><a href="" target="_blank" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">À visiter</a></li>
+                                                <li><a href="{% slugurl 'le-village' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Le village</a></li>
+                                                <li><a href="https://www.ot-paysdebray.fr/fr/" target="_blank" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">À visiter</a></li>
                                             </ul>
                                         </details>
                                     </li>
@@ -214,8 +209,8 @@
                                         <details>
                                             <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Actualités & Événements</summary>
                                             <ul class="p-2">
-                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Actualités</a></li>
-                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Événements</a></li>
+                                                <li><a href="{% slugurl 'actualites' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Actualités</a></li>
+                                                <li><a href="{% slugurl 'evenements' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Événements</a></li>
                                             </ul>
                                         </details>
                                     </li>
@@ -225,10 +220,10 @@
                                         <details>
                                             <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Vie Locale</summary>
                                             <ul class="p-2">
-                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">École</a></li>
-                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Associations</a></li>
-                                                <li><a href="" target="_blank" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Accueil Loisir</a></li>
-                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Location salle</a></li>
+                                                <li><a href="{% slugurl 'ecole' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">École</a></li>
+                                                <li><a href="{% slugurl 'associations' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Associations</a></li>
+                                                <li><a href="https://espacefamille.aiga.fr/index.html?dossier=11698905#connexion&152640" target="_blank" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Accueil Loisir</a></li>
+                                                <li><a href="{% slugurl 'location-des-salles' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Location salle</a></li>
                                             </ul>
                                         </details>
                                     </li>
@@ -238,16 +233,16 @@
                                         <details>
                                             <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Services & Infos Pratiques</summary>
                                             <ul class="p-2">
-                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Médical</a></li>
-                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Artisans</a></li>
-                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Collecte des déchets</a></li>
-                                                <li><a href="" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Numéros utiles</a></li>
+                                                <li><a href="{% slugurl 'medical' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Médical</a></li>
+                                                <li><a href="{% slugurl 'artisans' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Artisans</a></li>
+                                                <li><a href="{% slugurl 'collecte-des-dechets' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Collecte des déchets</a></li>
+                                                <li><a href="{% slugurl 'numeros-utiles' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Numéros utiles</a></li>
                                             </ul>
                                         </details>
                                     </li>
 
                                     <!-- COMMUNAUTÉ DE COMMUNES mobile -->
-                                    <li><a href="" class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Communauté de Communes</a></li>
+                                    <li><a href="https://cc-paysdebray.com/" target="_blank" class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Communauté de Communes</a></li>
 
                                     <li class="mt-2 pt-2 border-t border-gray-100">
                                         <div class="px-4 py-2">
