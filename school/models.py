@@ -22,7 +22,7 @@ class SchoolIndexPage(Page):
         context = super().get_context(request, *args, **kwargs)
         menus = CanteenMenu.objects.all().order_by('-date')
         
-        paginator = Paginator(menus, 10)
+        paginator = Paginator(menus, 8)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         

@@ -3,14 +3,9 @@
 
 {% block content %}
 
-<!-- Contenu principal de la page -->
-<div class="prose-lg mx-auto my-8 text-center">
-    {{ page.body|richtext }}
-</div>
-
-<!-- Section des menus -->
+<!-- Section des menus EN PREMIER -->
 {% if menus %}
-<div class="mt-12">
+<div class="mb-12">
     <div class="text-center mb-8">
         <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
     </div>
@@ -75,10 +70,10 @@
     <div class="flex justify-center mt-12">
         <nav class="flex items-center space-x-2">
             {% if menus.has_previous %}
-                <a href="?page=1" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
+                <a href="?page=1" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors">
                     Première
                 </a>
-                <a href="?page={{ menus.previous_page_number }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
+                <a href="?page={{ menus.previous_page_number }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors">
                     ‹ Précédente
                 </a>
             {% endif %}
@@ -89,17 +84,17 @@
                         {{ num }}
                     </span>
                 {% elif num > menus.number|add:'-3' and num < menus.number|add:'3' %}
-                    <a href="?page={{ num }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
+                    <a href="?page={{ num }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors">
                         {{ num }}
                     </a>
                 {% endif %}
             {% endfor %}
 
             {% if menus.has_next %}
-                <a href="?page={{ menus.next_page_number }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
+                <a href="?page={{ menus.next_page_number }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors">
                     Suivante ›
                 </a>
-                <a href="?page={{ menus.paginator.num_pages }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
+                <a href="?page={{ menus.paginator.num_pages }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors">
                     Dernière
                 </a>
             {% endif %}
@@ -113,6 +108,32 @@
     </div>
     {% endif %}
 
+</div>
+
+<!-- Message si aucun menu -->
+{% else %}
+<div class="text-center py-12 mb-12">
+    <div class="max-w-md mx-auto">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+            </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">Aucun menu disponible</h3>
+        <p class="text-gray-600">Les menus de la cantine seront bientôt disponibles ici.</p>
+    </div>
+</div>
+{% endif %}
+
+<!-- Séparateur visuel -->
+{% if menus %}
+<div class="border-t border-gray-200 my-12"></div>
+{% endif %}
+
+<!-- Contenu principal de la page EN BAS -->
+{% if page.body %}
+<div class="prose-lg mx-auto text-center">
+    {{ page.body|richtext }}
 </div>
 {% endif %}
 
