@@ -36,6 +36,7 @@ class Ordinance(models.Model):
         MUNICIPAL = 'municipal', 'Municipal'
         PREFECTORAL = 'prefectural', 'Préfectoral'
     
+    title = models.CharField("Titre de l'arrêté", max_length=255)
     date = models.DateField("Date de l'arrêté")
     document = models.ForeignKey(
         'wagtaildocs.Document',

@@ -11,7 +11,7 @@ class OrdinanceViewSet(SnippetViewSet):
     icon = "warning"
     menu_label = "Arrêtés"
     menu_name = "ordinance"
-    list_display = ["date", "author", "get_type_display"]
+    list_display = ["title", "date", "author", "get_type_display"]
     list_per_page = 20
     list_filter = ["type", "author"]
 

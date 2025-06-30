@@ -31,7 +31,8 @@ class SchoolIndexPage(Page):
 
 
 class CanteenMenu(models.Model):
-    date = models.DateField("Date du menu")
+    date = models.DateField("Date du premier jour de la semaine")
+    end_date = models.DateField("Dernier jour de la semaine")
     document = models.ForeignKey(
         'wagtaildocs.Document',
         on_delete=models.CASCADE,

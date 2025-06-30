@@ -1,12 +1,169 @@
 {% extends "base.html" %}
+
 {% load wagtailcore_tags %}
-
-
 
 {% block content %}
 
 <div class="prose-lg mx-auto my-8 text-center">
     {{ page.body|richtext }}
 </div>
+
+<!-- Section Actualités et Événements récents -->
+{% if last_news or last_event %}
+<div class="mt-16 mb-8">
+    <!-- Titre de section -->
+    <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Actualités & Événements</h2>
+        <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+        <p class="text-gray-600 mt-4">Restez informé des dernières nouvelles et événements de la commune</p>
+    </div>
+
+    <!-- Grille des cartes -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        
+        <!-- Dernière Actualité -->
+        {% if last_news %}
+        <div class="card bg-white shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200">
+            <div class="card-body p-6">
+                <!-- En-tête avec icône -->
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"/>
+                                <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V9a1 1 0 00-1-1h-1v3a2 2 0 01-2 2H5a2 2 0 01-2-2V9a1 1 0 00-1 1v5.5a1.5 1.5 0 01-3 0V9a2 2 0 012-2h1V5a2 2 0 012-2h8a2 2 0 012 2v2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="badge badge-primary badge-sm mb-2">Actualité</span>
+                            <p class="text-sm text-gray-600">Dernière publication</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Titre -->
+                <h3 class="card-title text-xl font-bold text-gray-900 mb-3 line-clamp-2">
+                    {{ last_news.title }}
+                </h3>
+                
+                
+                <!-- Métadonnées -->
+                <div class="flex items-center text-sm text-gray-500 mb-6 space-x-4">
+                    <div class="flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>{{ last_news.date|date:"d/m/Y" }}</span>
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>{{ last_news.owner }}</span>
+                    </div>
+                </div>
+                
+                <!-- Action -->
+                <div class="card-actions justify-end">
+                    <a href="{% pageurl last_news %}" class="btn btn-primary btn-sm">
+                        Lire
+                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Dernier Événement -->
+        {% if last_event %}
+        <div class="card bg-white shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-green-200">
+            <div class="card-body p-6">
+                <!-- En-tête avec icône -->
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="badge badge-success badge-sm mb-2">Événement</span>
+                            <p class="text-sm text-gray-600">Prochain événement</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Titre -->
+                <h3 class="card-title text-xl font-bold text-gray-900 mb-3 line-clamp-2">
+                    {{ last_event.title }}
+                </h3>
+                
+                
+                <!-- Métadonnées -->
+                <div class="flex items-center text-sm text-gray-500 mb-6 space-x-4">
+                    <div class="flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>{{ last_event.date|date:"d/m/Y" }}</span>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>{{ last_event.localisation }}</span>
+                    </div>
+                </div>
+                
+                <!-- Action -->
+                <div class="card-actions justify-end">
+                    <a href="{% pageurl last_event %}" class="btn btn-success btn-sm">
+                        Voir l'événement
+                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Liens vers toutes les actualités et événements -->
+    <div class="text-center mt-12">
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% slugurl 'actualites' %}" class="btn btn-outline btn-primary">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"/>
+                </svg>
+                Toutes les actualités
+            </a>
+            <a href="{% slugurl 'evenements' %}" class="btn btn-outline btn-success">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+                </svg>
+                Tous les événements
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Message si aucun contenu -->
+{% else %}
+<div class="text-center py-12 mt-16">
+    <div class="max-w-md mx-auto">
+        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+            </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">Aucun contenu récent</h3>
+        <p class="text-gray-600">Les actualités et événements apparaîtront ici dès leur publication.</p>
+    </div>
+</div>
+{% endif %}
 
 {% endblock content %}
