@@ -6,31 +6,19 @@
 
 Ce dépôt contient le code source de la future application web de la mairie d'Ons-en-Bray.
 
-## Code source ouvert
-
-📖 **Le code source de ce projet est public et open source**
-
-Le code source de cette application est disponible sur GitHub. Cette approche permet :
-
-- La possibilité pour d'autres communes de s'inspirer de ce projet
-
-## Statut du projet
-
-🚧 **En cours de développement** 🚧
-
-L'application est actuellement en phase de développement.
-
 ## Technologies utilisées
 
 - **Framework** : Django (Python) et Wagtail (CMS)
 - **Base de données** : SQLite (développement) / MYSQL (production)
-- **Frontend** : HTML, CSS, HTMX
+- **Frontend** : HTML, CSS
 - **Styles** : Tailwind CSS et DaisyUI
 
-## Fonctionnalités prévues
+## Espace d'administration
 
-- 📰 Actualités et informations municipales
-- 📅 Agenda des événements
-- 📞 Annuaire des services
-- 🗺️ Informations touristiques
-- 📋 Démarches administratives
+L'application dispose d'un espace d'administration complet basé sur Wagtail avec les fonctionnalités suivantes :
+
+- **Intégration des modèles Django** : Tous les modèles Django sont intégrés dans l'interface d'administration Wagtail pour une gestion centralisée
+- **Système de permissions avancé** :
+  - **Administrateurs** : Accès complet à tous les modules et fonctionnalités
+  - **Conseillers municipaux** : Permissions spécifiques adaptées à leurs responsabilités et domaines d'intervention
+- **Interface unifiée** : Gestion cohérente du contenu et des données administratives depuis une seule interface
