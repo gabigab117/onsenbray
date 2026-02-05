@@ -3,100 +3,123 @@
 
 {% block content %}
 
-<!-- Contenu principal de la page -->
-<div class="lead text-center my-5 mx-auto" style="max-width: 800px;">
-    {{ page.body|richtext }}
-</div>
-
-<!-- Section des actualités -->
-{% if news_items %}
-<div class="my-5">
-    <div class="text-center mb-5">
-        <div class="bg-primary mx-auto rounded-pill" style="width: 6rem; height: 4px;"></div>
+<!-- Header Section -->
+<section class="bg-primary text-white py-5 position-relative overflow-hidden">
+    <!-- Abstract Background -->
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.1;">
+        <i class="bi bi-newspaper display-1 position-absolute" style="right: -2rem; top: -2rem; font-size: 15rem; transform: rotate(15deg);"></i>
     </div>
     
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {% for news_item in news_items %}
-        <div class="col">
-            <div class="card h-100 border-light shadow-sm">
-                <div class="card-body p-4 d-flex flex-column h-100">
-                    <!-- Titre en haut de la card -->
-                    <div class="mb-3">
-                        <h2 class="h5 fw-bold text-dark mb-0">
-                            {{ news_item.title }}
-                        </h2>
-                    </div>
+    <div class="container position-relative z-1 py-3 text-center">
+        <nav aria-label="breadcrumb" class="mb-3 d-flex justify-content-center">
+            <ol class="breadcrumb mb-0">
+                 <li class="breadcrumb-item"><a href="/" class="text-white text-decoration-none opacity-75">Accueil</a></li>
+                 <li class="breadcrumb-item active text-white" aria-current="page">Actualités</li>
+            </ol>
+        </nav>
+        <h1 class="display-4 fw-bold font-serif mb-0">{{ page.title }}</h1>
+        {% if page.body %}
+        <div class="mt-4 lead opacity-90 mx-auto" style="max-width: 700px;">
+            {{ page.body|richtext }}
+        </div>
+        {% endif %}
+    </div>
+    
+    <!-- Wave Bottom -->
+    <div class="position-absolute bottom-0 start-0 w-100" style="height: 32px; background: transparent;">
+        <svg viewBox="0 0 1440 32" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+            <path d="M0 32H1440V0C1440 0 1140 32 720 32C300 32 0 0 0 0V32Z" fill="#f8f9fa"/>
+        </svg>
+    </div>
+</section>
 
-                    <!-- En-tête de la card avec icône -->
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="bg-primary bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center me-3" style="width: 2.5rem; height: 2.5rem;">
-                            <i class="bi bi-newspaper fs-5 text-primary"></i>
+<!-- News List Section -->
+<section class="py-5 bg-light">
+    <div class="container pb-5">
+        {% if news_items %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for news_item in news_items %}
+            <div class="col">
+                <article class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden hover-lift transition-all">
+                    <div class="card-body p-4 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                             <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-1 small">Actualité</span>
+                             <small class="text-secondary opacity-75">
+                                 <i class="bi bi-calendar me-1"></i>
+                                 {{ news_item.specific.date|date:"d/m/Y" }}
+                             </small>
                         </div>
-                        <div>
-                            <p class="small text-secondary mb-0">Article du :</p>
+                        
+                        <h2 class="h5 fw-bold font-serif text-dark mb-3">
+                            <a href="{% pageurl news_item %}" class="text-decoration-none text-reset stretched-link">
+                                {{ news_item.title }}
+                            </a>
+                        </h2>
+                        
+                        <!-- Optional: Intro/Snippet if available in model -->
+                        
+                        <div class="mt-auto pt-3 d-flex align-items-center justify-content-between border-top border-light">
+                            <div class="d-flex align-items-center small text-secondary">
+                                <i class="bi bi-person-circle me-2"></i>
+                                <span>{{ news_item.owner.first_name }}</span>
+                            </div>
+                            <span class="text-primary small fw-medium">
+                                Lire <i class="bi bi-arrow-right ms-1"></i>
+                            </span>
                         </div>
                     </div>
-                
-                    <!-- Informations de l'article -->
-                    <div class="flex-grow-1">
-                        <div class="d-flex align-items-center small text-secondary mb-2">
-                             <i class="bi bi-calendar me-2"></i>
-                            <span class="fw-medium">{{ news_item.specific.date|date:"d/m/Y" }}</span>
-                        </div>
-                
-                        <div class="d-flex align-items-center small text-secondary">
-                             <i class="bi bi-person me-2"></i>
-                            <span>Publié par {{ news_item.owner.first_name }}</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Action -->
-                    <div class="text-end mt-4">
-                        <a href="{% pageurl news_item %}" class="btn btn-primary btn-sm rounded-pill px-3">
-                            Lire
-                            <i class="bi bi-arrow-right ms-1"></i>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if news_items.has_other_pages %}
+        <div class="mt-5 pt-4 border-top border-light">
+            <nav aria-label="Pagination">
+                <ul class="pagination justify-content-center">
+                    {% if news_items.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link rounded-circle mx-1 border-0 shadow-sm text-dark" href="?page={{ news_items.previous_page_number }}" aria-label="Précédent" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-chevron-left"></i>
                         </a>
-                    </div>
-                </div>
+                    </li>
+                    {% endif %}
+
+                    {% for num in news_items.paginator.page_range %}
+                        {% if news_items.number == num %}
+                            <li class="page-item active">
+                                <span class="page-link rounded-circle mx-1 border-0 shadow-sm bg-primary text-white" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">{{ num }}</span>
+                            </li>
+                        {% elif num > news_items.number|add:'-3' and num < news_items.number|add:'3' %}
+                            <li class="page-item">
+                                <a class="page-link rounded-circle mx-1 border-0 shadow-sm text-secondary" href="?page={{ num }}" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if news_items.has_next %}
+                     <li class="page-item">
+                        <a class="page-link rounded-circle mx-1 border-0 shadow-sm text-dark" href="?page={{ news_items.next_page_number }}" aria-label="Suivant" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        {% endif %}
+
+        {% else %}
+        <div class="text-center py-5">
+            <div class="bg-white p-5 rounded-4 shadow-sm mx-auto" style="max-width: 500px;">
+                <i class="bi bi-inbox fs-1 text-muted mb-3 d-block"></i>
+                <h3 class="h5 fw-bold text-dark">Aucune actualité</h3>
+                <p class="text-secondary mb-0">Il n'y a pas encore d'article publié dans cette rubrique.</p>
             </div>
         </div>
-        {% endfor %}
+        {% endif %}
     </div>
+</section>
 
-    <!-- Pagination -->
-    {% if news_items.has_other_pages %}
-    <div class="d-flex justify-content-center mt-5">
-        <nav aria-label="Pagination">
-            <ul class="pagination">
-                {% if news_items.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page=1">Première</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ news_items.previous_page_number }}">‹ Précédente</a>
-                </li>
-                {% endif %}
-
-                {% for num in news_items.paginator.page_range %}
-                    {% if news_items.number == num %}
-                        <li class="page-item active"><span class="page-link bg-primary border-primary">{{ num }}</span></li>
-                    {% elif num > news_items.number|add:'-3' and num < news_items.number|add:'3' %}
-                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-                    {% endif %}
-                {% endfor %}
-
-                {% if news_items.has_next %}
-                 <li class="page-item">
-                    <a class="page-link" href="?page={{ news_items.next_page_number }}">Suivante ›</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ news_items.paginator.num_pages }}">Dernière</a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </div>
-    {% endif %}
-</div>
-{% endif %}
-{% endblock %}
+{% endblock content %}

@@ -3,85 +3,86 @@
 
 {% block content %}
 
-<!-- Contenu principal de la page -->
-<div class="lead text-center my-5 mx-auto" style="max-width: 800px;">
-    {{ page.body|richtext }}
-</div>
-
-<!-- Section des associations -->
-{% if associations %}
-<div class="my-5">
-    <div class="text-center mb-5">
-        <div class="bg-primary mx-auto rounded-pill" style="width: 6rem; height: 4px;"></div>
+<!-- Header Section -->
+<section class="bg-primary text-white py-5 position-relative overflow-hidden">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.1;">
+        <i class="bi bi-people display-1 position-absolute" style="right: -2rem; top: -2rem; font-size: 15rem; transform: rotate(15deg);"></i>
     </div>
     
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {% for association in associations %}
-        <div class="col">
-            <div class="card h-100 border-light shadow-sm">
-                <div class="card-body p-4 d-flex flex-column">
-                    <!-- Titre en haut de la card -->
-                    <div class="mb-3">
-                        <h2 class="h5 fw-bold text-dark mb-0 text-truncate" style="max-height: 3.6em; overflow: hidden;">
-                            {{ association.title }}
-                        </h2>
-                    </div>
+    <div class="container position-relative z-1 py-3 text-center">
+        <nav aria-label="breadcrumb" class="mb-3 d-flex justify-content-center">
+            <ol class="breadcrumb mb-0">
+                 <li class="breadcrumb-item"><a href="/" class="text-white text-decoration-none opacity-75">Accueil</a></li>
+                 <li class="breadcrumb-item active text-white" aria-current="page">Associations</li>
+            </ol>
+        </nav>
+        <h1 class="display-4 fw-bold font-serif mb-0">{{ page.title }}</h1>
+        {% if page.body %}
+        <div class="mt-4 lead opacity-90 mx-auto" style="max-width: 700px;">
+            {{ page.body|richtext }}
+        </div>
+        {% endif %}
+    </div>
+    
+    <!-- Wave Bottom -->
+    <div class="position-absolute bottom-0 start-0 w-100" style="height: 32px; background: transparent;">
+        <svg viewBox="0 0 1440 32" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+            <path d="M0 32H1440V0C1440 0 1140 32 720 32C300 32 0 0 0 0V32Z" fill="#f8f9fa"/>
+        </svg>
+    </div>
+</section>
 
-                    <!-- En-tête de la card avec icône -->
-                    <div class="d-flex align-items-start justify-content-between mb-3">
-                        <div class="d-flex align-items-center">
-                            <div class="bg-primary bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center me-3" style="width: 2.5rem; height: 2.5rem;">
-                                <i class="bi bi-people fs-5 text-primary"></i>
-                            </div>
-                            <div>
-                                <p class="small text-secondary mb-0">Association :</p>
-                            </div>
+<!-- Associations List Section -->
+<section class="py-5 bg-light">
+    <div class="container pb-5">
+        {% if associations %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for association in associations %}
+            <div class="col">
+                <article class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden hover-lift transition-all">
+                    <div class="card-body p-4 d-flex flex-column">
+                        <div class="d-flex align-items-center mb-3">
+                             <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-3 me-3 d-flex justify-content-center align-items-center" style="width: 3.5rem; height: 3.5rem;">
+                                 <i class="bi bi-people fs-4"></i>
+                             </div>
+                             <div>
+                                <h2 class="h5 fw-bold font-serif text-dark mb-0">
+                                    <a href="{% pageurl association %}" class="text-decoration-none text-reset stretched-link">
+                                        {{ association.title }}
+                                    </a>
+                                </h2>
+                             </div>
+                        </div>
+                        
+                        <!-- Summary -->
+                        <div class="text-secondary small mb-4 flex-grow-1 opacity-75">
+                            {% if association.summary %}
+                                {{ association.summary|richtext|truncatechars_html:120 }}
+                            {% else %}
+                                <i>Pas de description courte.</i>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mt-auto px-4 py-3 bg-light mx-n4 mb-n4 border-top border-light d-flex justify-content-between align-items-center">
+                            <span class="text-primary fw-medium small">
+                                Découvrir <i class="bi bi-arrow-right ms-1"></i>
+                            </span>
                         </div>
                     </div>
-                    
-                    <!-- Informations de l'association - zone flexible -->
-                    <div class="flex-grow-1 mb-3">
-                        <!-- Résumé de l'association -->
-                        {% if association.summary %}
-                        <div class="small text-secondary">
-                                {{ association.summary|richtext }}
-                         
-                        </div>
-                        {% else %}
-                        <div class="d-flex align-items-center small text-secondary fst-italic">
-                            <i class="bi bi-info-circle me-2"></i>
-                            <span>Aucune description disponible</span>
-                        </div>
-                        {% endif %}
-                    </div>
-                    
-                    <!-- Action - toujours en bas -->
-                    <div class="text-end mt-auto">
-                        <a href="{% pageurl association %}" class="btn btn-primary btn-sm rounded-pill px-3">
-                            Découvrir
-                            <i class="bi bi-arrow-right ms-1"></i>
-                        </a>
-                    </div>
-                </div>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <div class="bg-white p-5 rounded-4 shadow-sm mx-auto" style="max-width: 500px;">
+                <i class="bi bi-people fs-1 text-muted mb-3 d-block"></i>
+                <h3 class="h5 fw-bold text-dark">Aucune association</h3>
+                <p class="text-secondary mb-0">La liste des associations est vide pour le moment.</p>
             </div>
         </div>
-        {% endfor %}
+        {% endif %}
     </div>
-
-    <!-- Message si aucune association -->
-    {% else %}
-    <div class="text-center py-5 my-5">
-        <div class="text-center mb-5">
-            <div class="bg-primary mx-auto rounded-pill" style="width: 6rem; height: 4px;"></div>
-        </div>
-        <div class="mx-auto" style="max-width: 400px;">
-            <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 4rem; height: 4rem;">
-                <i class="bi bi-people fs-3 text-primary"></i>
-            </div>
-            <h2 class="h5 fw-bold text-dark mb-2">Aucune association</h2>
-            <p class="text-secondary">Les associations de la commune seront bientôt disponibles ici.</p>
-        </div>
-    </div>
-{% endif %}
+</section>
 
 {% endblock content %}

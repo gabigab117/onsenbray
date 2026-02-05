@@ -7,116 +7,145 @@
 
 {% block content %}
 
-<!-- Section titre enrichie -->
-<div class="mb-5 position-relative overflow-hidden">
-    <div class="bg-light py-5 px-4 px-md-5 rounded-4 border border-light position-relative text-center">
-        <!-- Titre -->
-        <div class="d-flex align-items-center justify-content-center mb-3">
-             <div class="bg-primary bg-opacity-10 rounded-circle p-3 d-inline-flex align-items-center justify-content-center" style="width: 4rem; height: 4rem;">
-                <i class="bi bi-search fs-3 text-primary"></i>
-            </div>
-        </div>
-        <h1 class="display-5 fw-bold text-dark mb-4">Recherche</h1>
-        <div class="bg-primary mx-auto rounded-pill" style="width: 6rem; height: 4px;"></div>
+<!-- Header Section -->
+<section class="bg-primary text-white py-5 position-relative overflow-hidden">
+     <!-- Abstract Background -->
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.1;">
+        <i class="bi bi-search display-1 position-absolute" style="right: -5%; top: 20%; font-size: 20rem; transform: rotate(15deg);"></i>
     </div>
-</div>
-
-<!-- Résultats de recherche -->
-{% if search_results %}
-<div class="mb-5">
-    <div class="d-flex align-items-center justify-content-between mb-4">
-        <h2 class="h4 fw-bold text-dark mb-0">
-            Résultats
-            {% if search_query %}
-            <span class="fw-normal text-secondary small ms-2">pour "{{ search_query }}"</span>
-            {% endif %}
-        </h2>
-        <div class="small text-muted">
-            {{ search_results.paginator.count }} résultat{{ search_results.paginator.count|pluralize }}
-        </div>
-    </div>
-
-    <!-- Liste des résultats -->
-    <div class="d-flex flex-column gap-3">
-        {% for result in search_results %}
-        <div class="card border-light shadow-sm">
-            <div class="card-body p-4">
-                <div class="d-flex align-items-start justify-content-between gap-3">
-                    <div class="flex-grow-1">
-                        <h3 class="h5 fw-bold mb-2">
-                            <a href="{% pageurl result %}" class="text-decoration-none text-dark">
-                                {{ result }}
-                            </a>
-                        </h3>
-                        {% if result.search_description %}
-                        <p class="text-secondary mb-0 small">
-                            {{ result.search_description }}
-                        </p>
-                        {% endif %}
-                    </div>
-                    <div class="flex-shrink-0">
-                        <a href="{% pageurl result %}" class="btn btn-sm btn-outline-primary rounded-pill px-3">
-                            Voir
-                            <i class="bi bi-arrow-right ms-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-
-    <!-- Pagination -->
-    {% if search_results.has_other_pages %}
-    <div class="d-flex justify-content-center mt-5">
-        <nav aria-label="Pagination">
-            <ul class="pagination">
-                {% if search_results.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">
-                        ‹ Précédent
-                    </a>
-                </li>
-                {% endif %}
-
-                <li class="page-item active" aria-current="page">
-                    <span class="page-link bg-primary border-primary">{{ search_results.number }}</span>
-                </li>
-
-                {% if search_results.has_next %}
-                 <li class="page-item">
-                    <a class="page-link" href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">
-                        Suivant ›
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
+    
+    <div class="container position-relative z-1 py-4 text-center">
+        <!-- Breadcrumb -->
+         <nav aria-label="breadcrumb" class="mb-4 d-flex justify-content-center">
+             <ol class="breadcrumb mb-0">
+                 <li class="breadcrumb-item"><a href="/" class="text-white text-decoration-none opacity-75">Accueil</a></li>
+                 <li class="breadcrumb-item active text-white" aria-current="page">Recherche</li>
+            </ol>
         </nav>
-    </div>
-    {% endif %}
-</div>
 
-<!-- Message aucun résultat -->
-{% elif search_query %}
-<div class="text-center py-5">
-    <div class="mx-auto" style="max-width: 500px;">
-        <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mx-auto mb-4" style="width: 5rem; height: 5rem;">
-            <i class="bi bi-search fs-2 text-secondary"></i>
-        </div>
-        <h2 class="h4 fw-bold text-dark mb-3">Aucun résultat trouvé</h2>
-        <p class="text-secondary mb-4">
-            Aucun résultat pour "{{ search_query }}". Essayez avec d'autres mots-clés.
-        </p>
-        <div class="text-start bg-light p-4 rounded-4 small text-secondary">
-            <p class="fw-bold mb-2">Suggestions :</p>
-            <ul class="ps-3 mb-0">
-                <li>Vérifiez l'orthographe des mots-clés</li>
-                <li>Utilisez des termes plus généraux</li>
-                <li>Essayez des synonymes</li>
-            </ul>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold font-serif mb-4">Résultats de recherche</h1>
+                
+                <form action="{% url 'search' %}" method="get" class="position-relative">
+                   <div class="input-group input-group-lg bg-white rounded-pill overflow-hidden p-1 shadow">
+                        <span class="input-group-text border-0 b-0 bg-transparent ps-4">
+                            <i class="bi bi-search text-primary"></i>
+                        </span>
+                        <input type="text" 
+                               class="form-control border-0 b-0 shadow-none ps-2" 
+                               name="query" 
+                               value="{{ search_query }}" 
+                               placeholder="Que cherchez-vous ?"
+                               aria-label="Recherche">
+                        <button class="btn btn-primary rounded-pill px-4 m-1 fw-bold" type="submit">Rechercher</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-{% endif %}
+    
+    <!-- Wave Bottom -->
+    <div class="position-absolute bottom-0 start-0 w-100" style="height: 48px; background: transparent;">
+        <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+            <path d="M0 48H1440V0C1440 0 1140 48 720 48C300 48 0 0 0 0V48Z" fill="#f8f9fa"/>
+        </svg>
+    </div>
+</section>
 
-{% endblock %}
+<!-- Search Results -->
+<section class="py-5 bg-light">
+    <div class="container pb-5 position-relative z-2" style="margin-top: -2rem;">
+        {% if search_results %}
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="d-flex align-items-center justify-content-between mb-4 px-2">
+                    <span class="text-secondary fw-medium">
+                        "{{ search_query }}"
+                    </span>
+                    <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2">
+                        {{ search_results.paginator.count }} résultat{{ search_results.paginator.count|pluralize }}
+                    </span>
+                </div>
+
+                <div class="d-flex flex-column gap-3">
+                    {% for result in search_results %}
+                    <article class="card border-0 shadow-sm rounded-4 overflow-hidden hover-lift transition-all">
+                        <div class="card-body p-4">
+                            <div class="row align-items-center">
+                                <div class="col-md-9 mb-3 mb-md-0">
+                                    <h2 class="h5 fw-bold font-serif mb-2">
+                                        <a href="{% pageurl result %}" class="text-decoration-none text-dark stretched-link">
+                                            {{ result }}
+                                        </a>
+                                    </h2>
+                                    {% if result.search_description %}
+                                    <p class="text-secondary mb-0 small opacity-75">
+                                        {{ result.search_description }}
+                                    </p>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-3 text-md-end">
+                                    <span class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                        Voir <i class="bi bi-arrow-right ms-1"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+
+                 <!-- Pagination -->
+                {% if search_results.has_other_pages %}
+                <div class="mt-5 pt-4">
+                    <nav aria-label="Pagination">
+                        <ul class="pagination justify-content-center">
+                            {% if search_results.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link rounded-circle mx-1 border-0 shadow-sm text-dark" href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="bi bi-chevron-left"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+
+                            <li class="page-item active">
+                                <span class="page-link rounded-circle mx-1 border-0 shadow-sm bg-primary text-white" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">{{ search_results.number }}</span>
+                            </li>
+
+                            {% if search_results.has_next %}
+                             <li class="page-item">
+                                <a class="page-link rounded-circle mx-1 border-0 shadow-sm text-dark" href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="bi bi-chevron-right"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        {% elif search_query %}
+         <div class="text-center py-5">
+            <div class="bg-white p-5 rounded-4 shadow-sm mx-auto" style="max-width: 500px;">
+                <i class="bi bi-search fs-1 text-muted mb-3 d-block"></i>
+                <h3 class="h5 fw-bold text-dark">Aucun résultat</h3>
+                <p class="text-secondary mb-0">Nous n'avons rien trouvé pour "{{ search_query }}".</p>
+            </div>
+        </div>
+        
+        {% else %}
+        <div class="text-center py-5">
+            <div class="bg-white p-5 rounded-4 shadow-sm mx-auto" style="max-width: 500px;">
+                <i class="bi bi-search fs-1 text-muted mb-3 d-block"></i>
+                <h3 class="h5 fw-bold text-dark">Recherche</h3>
+                <p class="text-secondary mb-0">Entrez un mot-clé ci-dessus pour rechercher.</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock content %}

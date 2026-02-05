@@ -3,88 +3,103 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="card border-light shadow-sm">
-        <div class="card-body p-4 p-md-5">
-            
-            <!-- Métadonnées de l'événement -->
-            <div class="row g-4 mb-4 pb-4 border-bottom">
-                
-                <!-- Colonne gauche -->
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <div class="d-flex align-items-center text-secondary">
-                            <div class="bg-primary bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center me-3" style="width: 2.5rem; height: 2.5rem;">
-                                <i class="bi bi-calendar text-primary"></i>
-                            </div>
-                            <div>
-                                <p class="small text-secondary mb-0">Date</p>
-                                <p class="fw-medium mb-0">{{ page.date|date:"d/m/Y à H:i" }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <div class="d-flex align-items-start text-secondary">
-                            <div class="bg-success bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center me-3" style="width: 2.5rem; height: 2.5rem;">
-                                <i class="bi bi-geo-alt text-success"></i>
-                            </div>
-                            <div>
-                                <p class="small text-secondary mb-0">Localisation</p>
-                                <p class="fw-medium mb-0">{{ page.localisation }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Colonne droite -->
-                <div class="col-md-6">
-                    
-                    {% if page.organizer %}
-                    <div class="mb-3">
-                        <div class="d-flex align-items-center text-secondary">
-                            <div class="bg-primary bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center me-3" style="width: 2.5rem; height: 2.5rem;">
-                                <i class="bi bi-person-circle text-primary"></i>
-                            </div>
-                            <div>
-                                <p class="small text-secondary mb-0">Organisateur</p>
-                                <p class="fw-medium mb-0">{{ page.organizer.name }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    {% endif %}
-                    
-                    <div>
-                        <div class="d-flex align-items-center text-secondary">
-                            <div class="bg-warning bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center me-3" style="width: 2.5rem; height: 2.5rem;">
-                                <i class="bi bi-person text-warning"></i>
-                            </div>
-                            <div>
-                                <p class="small text-secondary mb-0">Publié par</p>
-                                <p class="fw-medium mb-0">{{ page.owner.first_name }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- Header / Event Info -->
+<section class="bg-primary text-white py-5 position-relative overflow-hidden">
+     <!-- Abstract Background -->
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.1;">
+        <i class="bi bi-calendar-event display-1 position-absolute" style="right: -5%; top: 20%; font-size: 20rem; transform: rotate(15deg);"></i>
+    </div>
+    
+    <div class="container position-relative z-1 py-4 text-center">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-4 d-flex justify-content-center">
+             <ol class="breadcrumb mb-0">
+                 <li class="breadcrumb-item"><a href="/" class="text-white text-decoration-none opacity-75">Accueil</a></li>
+                 <li class="breadcrumb-item"><a href="{% slugurl 'agenda' %}" class="text-white text-decoration-none opacity-75">Agenda</a></li>
+                 <li class="breadcrumb-item active text-white" aria-current="page">Événement</li>
+            </ol>
+        </nav>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <span class="badge bg-white text-primary bg-opacity-90 px-3 py-2 rounded-pill mb-3 fw-medium">Événement</span>
+                <h1 class="display-5 fw-bold font-serif mb-4">{{ page.title }}</h1>
             </div>
-            
-            <!-- Contenu de l'événement -->
-            <div class="lead">
-      
-                {{ page.body }}
-     
-            </div>
-            
-            <!-- Lien de retour -->
-            <div class="text-center mt-4 pt-4 border-top">
-                <a href="{{ page.get_parent.url }}" class="btn btn-outline-primary rounded-pill px-4">
-                    <i class="bi bi-arrow-left me-2"></i>
-                    Retour aux événements
-                </a>
-            </div>
-            
         </div>
     </div>
-</div>
+    
+    <!-- Wave Bottom -->
+    <div class="position-absolute bottom-0 start-0 w-100" style="height: 48px; background: transparent;">
+        <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+            <path d="M0 48H1440V0C1440 0 1140 48 720 48C300 48 0 0 0 0V48Z" fill="#f8f9fa"/>
+        </svg>
+    </div>
+</section>
+
+<!-- Event Details & Content -->
+<section class="py-5 bg-light">
+    <div class="container position-relative z-2" style="margin-top: -4rem;">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="bg-white rounded-4 shadow-sm border border-light overflow-hidden">
+                    
+                    <!-- Key Info Bar -->
+                    <div class="bg-primary bg-opacity-10 p-4">
+                        <div class="row g-4 justify-content-center text-center text-md-start">
+                            <div class="col-md-4 d-flex align-items-center justify-content-center justify-content-md-start">
+                                <div class="bg-white text-primary rounded-circle p-3 shadow-sm me-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="bi bi-calendar3 fs-5"></i>
+                                </div>
+                                <div>
+                                    <div class="small text-uppercase text-secondary fw-bold">Date</div>
+                                    <div class="text-dark fw-medium">{{ page.date|date:"d F Y" }}</div>
+                                    <div class="small text-muted">{{ page.date|date:"H:i" }}</div>
+                                </div>
+                            </div>
+                            
+                            {% if page.localisation %}
+                            <div class="col-md-4 d-flex align-items-center justify-content-center justify-content-md-start">
+                                <div class="bg-white text-primary rounded-circle p-3 shadow-sm me-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="bi bi-geo-alt fs-5"></i>
+                                </div>
+                                <div>
+                                    <div class="small text-uppercase text-secondary fw-bold">Lieu</div>
+                                    <div class="text-dark fw-medium">{{ page.localisation }}</div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            
+                            {% if page.organizer %}
+                            <div class="col-md-4 d-flex align-items-center justify-content-center justify-content-md-start">
+                                <div class="bg-white text-primary rounded-circle p-3 shadow-sm me-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="bi bi-people fs-5"></i>
+                                </div>
+                                <div>
+                                    <div class="small text-uppercase text-secondary fw-bold">Organisateur</div>
+                                    <div class="text-dark fw-medium">{{ page.organizer.name }}</div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="p-4 p-md-5">
+                       <div class="rich-text-content text-dark lh-lg">
+                            {{ page.body|richtext }}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Bottom -->
+                <div class="d-flex justify-content-center mt-5">
+                    <a href="{{ page.get_parent.url }}" class="btn btn-outline-primary rounded-pill px-4 hover-lift">
+                        <i class="bi bi-arrow-left me-2"></i>
+                        Retour à l'agenda
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock content %}
