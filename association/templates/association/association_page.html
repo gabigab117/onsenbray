@@ -3,24 +3,65 @@
 
 {% block content %}
 
-<div class="max-w-4xl mx-auto">
-    <div class="card bg-white shadow-lg border border-gray-100">
-        <div class="card-body p-8">
-            
-            <!-- Contenu de l'article -->
-            <div class="prose prose-lg max-w-none mx-auto">
-                {{ page.body }}
+<!-- Header / Association Info -->
+<section class="bg-primary text-white py-5 position-relative overflow-hidden">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.1;">
+        <i class="bi bi-people display-1 position-absolute" style="right: -5%; top: 20%; font-size: 20rem; transform: rotate(15deg);"></i>
+    </div>
+    
+    <div class="container position-relative z-1 py-4 text-center">
+        <nav aria-label="breadcrumb" class="mb-4 d-flex justify-content-center">
+             <ol class="breadcrumb mb-0">
+                 <li class="breadcrumb-item"><a href="/" class="text-white text-decoration-none opacity-75">Accueil</a></li>
+                 <li class="breadcrumb-item"><a href="{% slugurl 'associations' %}" class="text-white text-decoration-none opacity-75">Associations</a></li>
+                 <li class="breadcrumb-item active text-white" aria-current="page">Fiche association</li>
+            </ol>
+        </nav>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                 <div class="bg-white text-primary rounded-circle p-3 d-inline-flex justify-content-center align-items-center mb-3 shadow-sm" style="width: 4rem; height: 4rem;">
+                     <i class="bi bi-people fs-2"></i>
+                 </div>
+                <h1 class="display-5 fw-bold font-serif mb-4">{{ page.title }}</h1>
             </div>
-            
-            <!-- Lien de retour -->
-            <div class="text-center mt-8 pt-6 border-t border-gray-200">
-                <a href="{{ page.get_parent.url }}" class="btn btn-outline btn-primary">
-                    Retour à la liste des associations
-                </a>
-            </div>
-            
         </div>
     </div>
-</div>
+    
+    <!-- Wave Bottom -->
+    <div class="position-absolute bottom-0 start-0 w-100" style="height: 48px; background: transparent;">
+        <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+            <path d="M0 48H1440V0C1440 0 1140 48 720 48C300 48 0 0 0 0V48Z" fill="#f8f9fa"/>
+        </svg>
+    </div>
+</section>
+
+<!-- Association Content -->
+<section class="py-5 bg-light">
+    <div class="container position-relative z-2" style="margin-top: -4rem;">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <article class="bg-white p-4 p-md-5 rounded-4 shadow-sm border border-light">
+                    {% if page.summary %}
+                    <div class="lead text-primary fw-medium mb-4 pb-4 border-bottom border-light lh-lg">
+                        {{ page.summary|richtext }}
+                    </div>
+                    {% endif %}
+
+                    <div class="rich-text-content text-dark lh-lg">
+                        {{ page.body|richtext }}
+                    </div>
+                </article>
+                
+                <div class="d-flex justify-content-center mt-5">
+                    <a href="{{ page.get_parent.url }}" class="btn btn-outline-primary rounded-pill px-4 hover-lift">
+                        <i class="bi bi-arrow-left me-2"></i>
+                        Retour aux associations
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock content %}

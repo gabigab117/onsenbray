@@ -11,7 +11,7 @@ Ce dépôt contient le code source de la future application web de la mairie d'O
 - **Framework** : Django (Python) et Wagtail (CMS)
 - **Base de données** : SQLite (développement) / MYSQL (production)
 - **Frontend** : HTML, CSS
-- **Styles** : Tailwind CSS et DaisyUI
+- **Styles** : Bootstrap 5
 
 ## Espace d'administration
 

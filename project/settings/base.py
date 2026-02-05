@@ -56,8 +56,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
-    "tailwind",
-    "theme",
     "account",
     "core",
     "councilmeeting",
@@ -193,8 +191,6 @@ WAGTAILADMIN_BASE_URL = "https://onsenbray.fr/"
 # if untrusted users are allowed to upload files -
 # see https://docs.wagtail.org/en/stable/advanced_topics/deploying.html#user-uploaded-files
 WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
-
-TAILWIND_APP_NAME = 'theme'
 
 # Custom user model
 AUTH_USER_MODEL = 'account.CustomUser'

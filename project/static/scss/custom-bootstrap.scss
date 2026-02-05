@@ -1,0 +1,50 @@
+// Imports Bootstrap
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/variables-dark";
+@import "../../../node_modules/bootstrap/scss/maps";
+@import "../../../node_modules/bootstrap/scss/mixins";
+@import "../../../node_modules/bootstrap/scss/utilities";
+
+// Fusionner les couleurs (SANS $grays)
+$all-colors: map-merge-multiple(
+  $blues, $indigos, $purples, $pinks, $reds, 
+  $oranges, $yellows, $greens, $teals, $cyans
+);
+
+// Étendre les utilitaires
+$utilities: map-merge(
+  $utilities,
+  (
+    "color": map-merge(
+      map-get($utilities, "color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "color"), "values"),
+          ($all-colors)
+        ),
+      ),
+    ),
+    "background-color": map-merge(
+      map-get($utilities, "background-color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "background-color"), "values"),
+          ($all-colors)
+        ),
+      ),
+    ),
+    "border-color": map-merge(
+      map-get($utilities, "border-color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "border-color"), "values"),
+          ($all-colors)
+        ),
+      ),
+    ),
+  )
+);
+
+// Importer tout Bootstrap
+@import "../../../node_modules/bootstrap/scss/bootstrap";

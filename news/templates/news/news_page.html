@@ -3,34 +3,80 @@
 
 {% block content %}
 
-<div class="max-w-4xl mx-auto">
-    <div class="card bg-white shadow-lg border border-gray-100">
-        <div class="card-body p-8">
-            
-            <!-- Métadonnées de l'article -->
-            <div class="text-center mb-8 pb-6 border-b border-gray-200">
-                <div class="text-sm text-gray-600 mb-2">
-                    {{ page.date|date:"d/m/Y" }}
+<!-- Header / Article Info -->
+<section class="bg-primary text-white py-5 position-relative overflow-hidden">
+     <!-- Abstract Background -->
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.1;">
+        <i class="bi bi-newspaper display-1 position-absolute" style="right: -5%; top: 20%; font-size: 20rem; transform: rotate(15deg);"></i>
+    </div>
+    
+    <div class="container position-relative z-1 py-4 text-center">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-4 d-flex justify-content-center">
+             <ol class="breadcrumb mb-0">
+                 <li class="breadcrumb-item"><a href="/" class="text-white text-decoration-none opacity-75">Accueil</a></li>
+                 <li class="breadcrumb-item"><a href="{% slugurl 'actualites' %}" class="text-white text-decoration-none opacity-75">Actualités</a></li>
+                 <li class="breadcrumb-item active text-white" aria-current="page">Article</li>
+            </ol>
+        </nav>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <span class="badge bg-white text-primary bg-opacity-90 px-3 py-2 rounded-pill mb-3 fw-medium">Actualité</span>
+                <h1 class="display-5 fw-bold font-serif mb-4">{{ page.title }}</h1>
+                
+                <div class="d-flex flex-wrap align-items-center justify-content-center gap-4 text-white opacity-90 font-sans">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-calendar3 me-2"></i>
+                        <span>{{ page.date|date:"d F Y" }}</span>
+                    </div>
+                    {% if page.owner %}
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-person-circle me-2"></i>
+                        <span>{{ page.owner.first_name }} {{ page.owner.last_name }}</span>
+                    </div>
+                    {% endif %}
                 </div>
-                <div class="text-sm text-gray-600">
-                    {{ page.owner.first_name }}
-                </div>
             </div>
-            
-            <!-- Contenu de l'article -->
-            <div class="prose prose-lg max-w-none mx-auto">
-                {{ page.body }}
-            </div>
-            
-            <!-- Lien de retour -->
-            <div class="text-center mt-8 pt-6 border-t border-gray-200">
-                <a href="{{ page.get_parent.url }}" class="btn btn-outline btn-primary">
-                    Retour à la liste des articles
-                </a>
-            </div>
-            
         </div>
     </div>
-</div>
+    
+    <!-- Wave Bottom -->
+    <div class="position-absolute bottom-0 start-0 w-100" style="height: 48px; background: transparent;">
+        <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+            <path d="M0 48H1440V0C1440 0 1140 48 720 48C300 48 0 0 0 0V48Z" fill="#f8f9fa"/>
+        </svg>
+    </div>
+</section>
+
+<!-- Article Content -->
+<section class="py-5 bg-light">
+    <div class="container position-relative z-2" style="margin-top: -4rem;">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <article class="bg-white p-4 p-md-5 rounded-4 shadow-sm border border-light">
+                    
+                    {% if page.intro %}
+                    <div class="lead text-primary fw-medium mb-4 pb-4 border-bottom border-light lh-lg">
+                        {{ page.intro|richtext }}
+                    </div>
+                    {% endif %}
+
+                    <div class="rich-text-content text-dark lh-lg">
+                        {{ page.body|richtext }}
+                    </div>
+                </article>
+                
+                <!-- Navigation Bottom -->
+                <div class="d-flex justify-content-center mt-5">
+                    <a href="{{ page.get_parent.url }}" class="btn btn-outline-primary rounded-pill px-4 hover-lift">
+                        <i class="bi bi-arrow-left me-2"></i>
+                        Retour aux actualités
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock content %}

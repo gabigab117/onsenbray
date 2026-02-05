@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailuserbar tailwind_tags %}
+{% load static wagtailcore_tags wagtailuserbar %}
 
 <!DOCTYPE html>
 <html lang="fr" data-theme="light">
@@ -27,233 +27,197 @@
         {% endif %}
         <link rel="icon" href="{% static 'assets/ico.ico' %}"/>
 
+        {# Google Fonts: Inter (Sans) & Playfair Display (Serif) #}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/project.css' %}">
-        {% tailwind_css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-custom.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
         {% block extra_css %}{% endblock %}
+
+        <style>
+            /* Custom utility overrides */
+            :root {
+                --bs-font-sans-serif: 'Inter', system-ui, -apple-system, sans-serif;
+                --bs-font-serif: 'Playfair Display', serif;
+            }
+            body {
+                font-family: var(--bs-font-sans-serif);
+                color: #343a40;
+            }
+            h1, h2, h3, h4, h5, h6, .font-serif {
+                font-family: var(--bs-font-serif);
+            }
+            
+            /* Navbar */
+            .navbar-brand img {
+                transition: transform 0.3s ease;
+            }
+            .navbar-brand:hover img {
+                transform: scale(1.05);
+            }
+            .nav-link {
+                font-weight: 500;
+                color: #495057;
+                transition: color 0.2s ease;
+            }
+            .nav-link:hover, .nav-link.active {
+                color: var(--bs-primary) !important;
+            }
+            .dropdown-menu {
+                border: none;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            }
+            .dropdown-item {
+                font-weight: 500;
+                color: #495057;
+            }
+            .dropdown-item:active {
+                background-color: var(--bs-primary);
+            }
+
+            /* Animations */
+            .hover-lift {
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            .hover-lift:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+            }
+            .hover-shadow {
+                transition: box-shadow 0.3s ease;
+            }
+            .hover-shadow:hover {
+                box-shadow: 0 1rem 3rem rgba(0,0,0,0.15) !important;
+            }
+            
+            /* Utils */
+            .backdrop-blur {
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+            
+            /* Footer */
+            footer a:hover {
+                color: var(--bs-primary) !important;
+                text-decoration: underline !important;
+            }
+        </style>
     </head>
 
-    <body class="min-h-screen flex flex-col bg-gray-50">
+    <body class="d-flex flex-column min-vh-100 bg-light">
         {% wagtailuserbar %}
 
-        <!-- Navbar épurée et moderne -->
-        <header class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
-            <!-- Navigation principale -->
-            <nav class="py-3">
-                <div class="container mx-auto px-4">
-                    <div class="flex items-center justify-between">
-                        <!-- Logo et nom - plus compact -->
-                        <div class="flex items-center space-x-3">
-                            <a href="/" class="flex items-center space-x-3 group">
-                                <img
-                                    src="{% static 'assets/Blason_ville_fr_oise_ons_en_bray.svg' %}"
-                                    alt="Blason Ons-en-Bray"
-                                    class="w-12 h-12 transition-transform group-hover:scale-105"
-                                />
-                                <div class="flex flex-col">
-                                    <span class="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
-                                        Ons-en-Bray
-                                    </span>
-                                    <span class="text-xs text-gray-500 font-medium">Mairie</span>
-                                </div>
-                            </a>
+        <!-- Header / Navbar -->
+        <header class="bg-white shadow-sm sticky-top z-3">
+            <nav class="navbar navbar-expand-xl navbar-light py-2">
+                <div class="container">
+                    <!-- Logo & Brand -->
+                    <a class="navbar-brand d-flex align-items-center gap-3 text-decoration-none me-4" href="/">
+                        <img src="{% static 'assets/Blason_ville_fr_oise_ons_en_bray.svg' %}" 
+                             alt="Blason Ons-en-Bray" 
+                             style="width: 3.5rem; height: 3.5rem;"
+                             class="d-inline-block align-text-top"
+                        >
+                        <div class="d-flex flex-column lh-1">
+                            <span class="fs-4 fw-bold text-primary heading-font">
+                                Ons-en-Bray
+                            </span>
+                            <span class="small text-uppercase tracking-wider text-muted fw-bold" style="letter-spacing: 1px; font-size: 0.65rem;">Mairie Officielle</span>
                         </div>
+                    </a>
 
-                        <!-- Menu desktop épuré -->
-                        <div class="hidden xl:flex items-center space-x-8">
-
-                            <!-- LA MAIRIE - Menu simple au hover -->
-                            <div class="relative group">
-                                <button class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2 border-b-2 border-transparent group-hover:border-blue-600 flex items-center">
-                                    Mairie
-                                    <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                                    </svg>
-                                </button>
-                                <!-- Dropdown au hover -->
-                                <div class="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    <div class="py-2">
-                                        <a href="{% slugurl 'la-mairie' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">La Mairie</a>
-                                        <a href="{% slugurl 'comptes-rendus-des-conseils-municipaux' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Comptes rendus conseils municipaux</a>
-                                        <a href="{% slugurl 'arretes-municipaux-et-prefectoraux' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Arrêtés municipaux et préfectoraux</a>
-                                        <a href="{% slugurl 'citoyennete-et-demarches' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Citoyenneté / démarches</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- LE VILLAGE -->
-                            <div class="relative group">
-                                <button class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2 border-b-2 border-transparent group-hover:border-blue-600 flex items-center">
-                                    Village
-                                    <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                                    </svg>
-                                </button>
-                                <div class="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    <div class="py-2">
-                                        <a href="{% slugurl 'le-village' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Le village</a>
-                                        <a href="https://www.ot-paysdebray.fr/fr/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">À visiter</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- ACTUALITÉS & ÉVÉNEMENTS -->
-                            <div class="relative group">
-                                <button class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2 border-b-2 border-transparent group-hover:border-blue-600 flex items-center">
-                                    Actualités & Événements
-                                    <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                                    </svg>
-                                </button>
-                                <div class="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    <div class="py-2">
-                                        <a href="{% slugurl 'actualites' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Actualités</a>
-                                        <a href="{% slugurl 'evenements' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Événements</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- VIE LOCALE -->
-                            <div class="relative group">
-                                <button class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2 border-b-2 border-transparent group-hover:border-blue-600 flex items-center">
-                                    Vie Locale
-                                    <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                                    </svg>
-                                </button>
-                                <div class="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    <div class="py-2">
-                                        <a href="{% slugurl 'ecole' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">École</a>
-                                        <a href="{% slugurl 'associations' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Associations</a>
-                                        <a href="https://espacefamille.aiga.fr/index.html?dossier=11698905#connexion&152640" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Accueil Loisirs</a>
-                                        <a href="{% slugurl 'location-des-salles' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Location des salles</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- SERVICES & INFOS PRATIQUES -->
-                            <div class="relative group">
-                                <button class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2 border-b-2 border-transparent group-hover:border-blue-600 flex items-center">
-                                    Services & Infos
-                                    <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                                    </svg>
-                                </button>
-                                <div class="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    <div class="py-2">
-                                        <a href="{% slugurl 'medical' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Médical</a>
-                                        <a href="{% slugurl 'artisans-commerçants-et-entreprises' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Artisans</a>
-                                        <a href="{% slugurl 'collecte-des-dechets' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Collecte des déchets</a>
-                                        <a href="{% slugurl 'numeros-utiles' %}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Numéros utiles</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- COMMUNAUTÉ DE COMMUNES - Lien simple -->
-                            <a href="https://cc-paysdebray.com/" target="_blank" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2 border-b-2 border-transparent hover:border-blue-600">
-                                Communauté de Communes
-                            </a>
+                    <!-- Mobile Toggler -->
+                    <button class="navbar-toggler border-0 shadow-none p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                        <div class="p-2">
+                             <span class="navbar-toggler-icon"></span>
                         </div>
+                    </button>
 
-                        <!-- Recherche et menu mobile -->
-                        <div class="flex items-center space-x-4">
-                            <!-- Recherche compacte -->
-                            <div class="hidden lg:block">
-                                <div class="relative">
-                                    <form action="{% url 'search' %}" method="get">
-                                    <input 
-                                        type="text" 
-                                        placeholder="Rechercher..."
-                                        name="query"
-                                        class="w-56 pl-10 pr-4 py-2 text-sm border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-300 transition-all duration-200" 
-                                    />
-                                    <svg class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
-                                    </svg>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <!-- Menu mobile -->
-                            <div class="dropdown dropdown-end xl:hidden">
-                                <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                                    </svg>
-                                </div>
-                                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-xl bg-white rounded-xl w-64 border border-gray-100">
-                                    
-                                    <!-- LA MAIRIE mobile -->
-                                    <li>
-                                        <details>
-                                            <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Mairie</summary>
-                                            <ul class="p-2">
-                                                <li><a href="{% slugurl 'la-mairie' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">La Mairie</a></li>
-                                                <li><a href="{% slugurl 'comptes-rendus-conseils-municipaux' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Comptes rendus conseils municipaux</a></li>
-                                                <li><a href="{% slugurl 'arretes-municipaux' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Arrêtés municipaux et préfectoraux</a></li>
-                                                <li><a href="{% slugurl 'citoyennete-et-demarches' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Citoyenneté / démarches</a></li>
-                                            </ul>
-                                        </details>
-                                    </li>
-
-                                    <!-- LE VILLAGE mobile -->
-                                    <li>
-                                        <details>
-                                            <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Village</summary>
-                                            <ul class="p-2">
-                                                <li><a href="{% slugurl 'le-village' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Le village</a></li>
-                                                <li><a href="https://www.ot-paysdebray.fr/fr/" target="_blank" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">À visiter</a></li>
-                                            </ul>
-                                        </details>
-                                    </li>
-
-                                    <!-- ACTUALITÉS & ÉVÉNEMENTS mobile -->
-                                    <li>
-                                        <details>
-                                            <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Actualités & Événements</summary>
-                                            <ul class="p-2">
-                                                <li><a href="{% slugurl 'actualites' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Actualités</a></li>
-                                                <li><a href="{% slugurl 'evenements' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Événements</a></li>
-                                            </ul>
-                                        </details>
-                                    </li>
-
-                                    <!-- VIE LOCALE mobile -->
-                                    <li>
-                                        <details>
-                                            <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Vie Locale</summary>
-                                            <ul class="p-2">
-                                                <li><a href="{% slugurl 'ecole' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">École</a></li>
-                                                <li><a href="{% slugurl 'associations' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Associations</a></li>
-                                                <li><a href="https://espacefamille.aiga.fr/index.html?dossier=11698905#connexion&152640" target="_blank" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Accueil Loisirs</a></li>
-                                                <li><a href="{% slugurl 'location-des-salles' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Location salle</a></li>
-                                            </ul>
-                                        </details>
-                                    </li>
-
-                                    <!-- SERVICES & INFOS PRATIQUES mobile -->
-                                    <li>
-                                        <details>
-                                            <summary class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Services & Infos Pratiques</summary>
-                                            <ul class="p-2">
-                                                <li><a href="{% slugurl 'medical' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Médical</a></li>
-                                                <li><a href="{% slugurl 'artisans-commerçants-et-entreprises' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Artisans</a></li>
-                                                <li><a href="{% slugurl 'collecte-des-dechets' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Collecte des déchets</a></li>
-                                                <li><a href="{% slugurl 'numeros-utiles' %}" class="px-4 py-2 text-gray-600 hover:bg-blue-50 rounded-lg">Numéros utiles</a></li>
-                                            </ul>
-                                        </details>
-                                    </li>
-
-                                    <!-- COMMUNAUTÉ DE COMMUNES mobile -->
-                                    <li><a href="https://cc-paysdebray.com/" target="_blank" class="px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg">Communauté de Communes</a></li>
-
-                                    <li class="mt-2 pt-2 border-t border-gray-100">
-                                        <div class="px-4 py-2">
-                                            <input type="text" placeholder="Rechercher..." class="input input-bordered input-sm w-full" />
-                                        </div>
-                                    </li>
-                                </ul>
+                    <!-- Navbar Links -->
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header border-bottom">
+                            <h5 class="offcanvas-title fw-bold font-serif" id="offcanvasNavbarLabel">Menu</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav justify-content-center flex-grow-1 gap-1">
+                                <!-- MAIRIE -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Mairie
+                                    </a>
+                                    <ul class="dropdown-menu border-0 shadow-lg rounded-3 mt-2">
+                                        <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'la-mairie' %}">La Mairie</a></li>
+                                        <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'comptes-rendus-des-conseils-municipaux' %}">Comptes rendus conseils municipaux</a></li>
+                                        <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'arretes-municipaux-et-prefectoraux' %}">Arrêtés municipaux et préfectoraux</a></li>
+                                        <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'citoyennete-et-demarches' %}">Citoyenneté / démarches</a></li>
+                                    </ul>
+                                </li>
+                                <!-- LE VILLAGE -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Village
+                                    </a>
+                                    <ul class="dropdown-menu border-0 shadow-lg rounded-3 mt-2">
+                                        <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'le-village' %}">Le village</a></li>
+                                        <li><a class="dropdown-item py-2 px-3" href="https://www.ot-paysdebray.fr/fr/" target="_blank">À visiter</a></li>
+                                    </ul>
+                                </li>
+                                <!-- ACTUALITÉS & ÉVÉNEMENTS -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Actualités & Événements
+                                    </a>
+                                    <ul class="dropdown-menu border-0 shadow-lg rounded-3 mt-2">
+                                        <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'actualites' %}">Actualités</a></li>
+                                        <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'evenements' %}">Événements</a></li>
+                                    </ul>
+                                </li>
+                                <!-- VIE LOCALE -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Vie Locale
+                                    </a>
+                                    <ul class="dropdown-menu border-0 shadow-lg rounded-3 mt-2">
+                                        <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'ecole' %}">École</a></li>
+                                        <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'associations' %}">Associations</a></li>
+                                        <li><a class="dropdown-item py-2 px-3" href="https://espacefamille.aiga.fr/index.html?dossier=11698905#connexion&152640" target="_blank">Accueil Loisirs</a></li>
+                                        <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'location-des-salles' %}">Location des salles</a></li>
+                                    </ul>
+                                </li>
+                                <!-- SERVICES & INFOS -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Services & Infos
+                                    </a>
+                                    <ul class="dropdown-menu border-0 shadow-lg rounded-3 mt-2">
+                                        <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'medical' %}">Médical</a></li>
+                                        <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'artisans-commerçants-et-entreprises' %}">Artisans</a></li>
+                                        <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'collecte-des-dechets' %}">Collecte des déchets</a></li>
+                                        <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'numeros-utiles' %}">Numéros utiles</a></li>
+                                    </ul>
+                                </li>
+                                <!-- CC -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="https://cc-paysdebray.com/" target="_blank">Communauté de Communes</a>
+                                </li>
+                            </ul>
+                            
+                            <!-- Actions -->
+                            <div class="d-flex align-items-center gap-3 mt-3 mt-xl-0 ms-xl-4">
+                                <!-- Search -->
+                                <form class="d-flex position-relative" action="{% url 'search' %}" method="get">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" name="query" class="form-control rounded-pill ps-3 pe-5 border-secondary-subtle bg-light" placeholder="Rechercher..." aria-label="Rechercher">
+                                        <button class="btn btn-link position-absolute end-0 top-50 translate-middle-y text-secondary pe-3 border-0 text-decoration-none" type="submit">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -261,163 +225,100 @@
             </nav>
         </header>
 
-        <!-- Contenu principal avec carte blanche -->
-        <main class="container mx-auto px-4 py-8 grow max-w-6xl">
-            <!-- Wrapper avec arrière-plan blanc et ombre subtile -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                
-                <!-- Titre de la page enrichi -->
-                {% if page.title %}
-                <div class="mb-8 relative overflow-hidden">
-                    <!-- Arrière-plan avec dégradé subtil -->
-                    <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 py-12 px-8 border-b border-blue-100 relative">
-                        
-                        <!-- Blason en arrière-plan très subtil -->
-                        <div class="absolute right-8 top-1/2 transform -translate-y-1/2 opacity-5">
-                            <img src="{% static 'assets/Blason_ville_fr_oise_ons_en_bray.svg' %}" alt="" class="w-32 h-32" />
-                        </div>
-                        
-                        <!-- Contenu principal -->
-                        <div class="relative z-10 text-center">
-                            <!-- Ligne décorative avec blason -->
-                            <div class="flex items-center justify-center mb-6">
-                                <div class="w-16 h-0.5 bg-gradient-to-r from-transparent to-blue-300"></div>
-                                <img src="{% static 'assets/Blason_ville_fr_oise_ons_en_bray.svg' %}" alt="Blason Ons-en-Bray" class="w-12 h-12 mx-4" />
-                                <div class="w-16 h-0.5 bg-gradient-to-l from-transparent to-blue-300"></div>
-                            </div>
-                            
-                            <!-- Titre -->
-                            <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ page.title }}</h1>
-                            
-                            <!-- Ligne décorative finale -->
-                            <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-
-                <!-- Zone de contenu avec padding -->
-                <div class="p-8">
-                    {% block content %}{% endblock %}
-                </div>
-            </div>
+        <!-- Main Content -->
+        <main class="flex-grow-1">
+            {% block content %}{% endblock %}
         </main>
 
-        <!-- Footer moderne et équilibré -->
-        <footer class="bg-white border-t border-gray-200 mt-8">
-            <!-- Section principale -->
-            <div class="container mx-auto px-4 py-12">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Logo et description -->
-                    <div class="md:col-span-1">
-                        <div class="flex items-center space-x-3 mb-4">
-                            <img
-                                src="{% static 'assets/Blason_ville_fr_oise_ons_en_bray.svg' %}"
-                                alt="Blason Ons-en-Bray"
-                                class="w-12 h-12"
-                            />
-                            <div>
-                                <p class="text-lg font-bold text-gray-800">Ons-en-Bray</p>
+        <!-- Footer -->
+        <footer class="bg-white border-top border-3 border-primary pt-5 shadow-sm mt-auto">
+            <div class="container pb-5">
+                <div class="row g-5">
+                    <!-- Brand -->
+                    <div class="col-lg-4">
+                        <a href="/" class="d-flex align-items-center gap-3 text-dark text-decoration-none mb-3">
+                            <img src="{% static 'assets/Blason_ville_fr_oise_ons_en_bray.svg' %}" alt="Blason" style="width: 3.5rem;">
+                            <div class="d-flex flex-column">
+                                <span class="h4 fw-bold font-serif mb-0 text-primary">Ons-en-Bray</span>
+                                <span class="small text-muted">Site officiel de la mairie</span>
                             </div>
-                        </div>
-                        <p class="text-gray-600 text-sm leading-relaxed mb-6">
-                            Commune située dans le département de l'Oise, en région Hauts-de-France. 
-                            Un village riche en son passé, vivant avec son temps.
+                        </a>
+                        <p class="text-secondary mb-4 small">
+                            Commune située dans le département de l'Oise, en région Hauts-de-France.
                         </p>
+                        <div class="d-flex gap-2">
+                             <a href="https://fr.wikipedia.org/wiki/Ons-en-Bray" class="btn btn-primary btn-sm rounded-circle"><i class="bi bi-wikipedia"></i></a>
+                             <a href="mailto:mairie@onsenbray.fr" class="btn btn-outline-primary btn-sm rounded-circle"><i class="bi bi-envelope-fill"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Links -->
+                    <div class="col-6 col-lg-2">
+                        <h6 class="fw-bold mb-3 text-dark">Accès rapide</h6>
+                        <ul class="list-unstyled d-flex flex-column gap-2 text-secondary small">
+                            <li><a href="{% slugurl 'la-mairie' %}" class="text-decoration-none text-reset">La Mairie</a></li>
+                            <li><a href="{% slugurl 'actualites' %}" class="text-decoration-none text-reset">Actualités</a></li>
+                            <li><a href="{% slugurl 'evenements' %}" class="text-decoration-none text-reset">Agenda</a></li>
+                            <li><a href="{% slugurl 'citoyennete-et-demarches' %}" class="text-decoration-none text-reset">Démarches</a></li>
+                        </ul>
                     </div>
 
                     <!-- Contact -->
-                    <div class="md:pl-8">
-                        <p class="font-semibold text-gray-800 mb-4 flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-                            </svg>
-                            Contact
-                        </p>
-                        <div class="space-y-3 text-sm text-gray-600">
-                            <div class="flex items-start">
-                                <svg class="w-4 h-4 mr-2 mt-0.5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-                                </svg>
-                                <div>
-                                    <p>22 place de l'église</p>
-                                    <p>60650 Ons-en-Bray</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-                                </svg>
-                                <p>03 44 81 61 07</p>
-                            </div>
-                            <div class="flex items-center">
-                                <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-                                </svg>
-                                <p>mairie@onsenbray.fr</p>
-                            </div>
-                        </div>
+                    <div class="col-6 col-lg-3">
+                        <h6 class="fw-bold mb-3 text-dark">Contact</h6>
+                        <ul class="list-unstyled d-flex flex-column gap-3 text-secondary small">
+                           <li class="d-flex gap-2">
+                               <i class="bi bi-geo-alt-fill text-primary"></i>
+                               <span>22 place de l'église<br>60650 Ons-en-Bray</span>
+                           </li>
+                           <li class="d-flex gap-2">
+                               <i class="bi bi-telephone-fill text-primary"></i>
+                               <span>03 44 81 61 07</span>
+                           </li>
+                           <li class="d-flex gap-2">
+                               <i class="bi bi-envelope-at-fill text-primary"></i>
+                               <span>mairie@onsenbray.fr</span>
+                           </li>
+                        </ul>
                     </div>
 
                     <!-- Horaires -->
-                    <div class="md:pl-8">
-                        <p class="font-semibold text-gray-800 mb-4 flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-                            </svg>
-                            Horaires d'ouverture
-                        </p>
-                        <div class="grid grid-cols-2 gap-y-2 text-sm text-gray-600">
-                            <div>Lundi</div>
-                            <div class="font-medium">8h30 - 12h, 14h - 17h</div>
-                            
-                            <div>Mardi</div>
-                            <div class="font-medium">8h30 - 12h, 14h - 18h</div>
-                            
-                            <div>Mercredi</div>
-                            <div class="font-medium">Fermé</div>
-                            
-                            <div>Jeudi</div>
-                            <div class="font-medium">8h30 - 12h, 14h - 17h30</div>
-                            
-                            <div>Vendredi</div>
-                            <div class="font-medium">8h30 - 12h, 14h - 17h30</div>
-
-                            <div>Samedi</div>
-                            <div class="font-medium">8h30 - 12h</div>
-                            
-                            <div>Dimanche</div>
-                            <div class="font-medium">Fermé</div>
+                    <div class="col-lg-3">
+                        <div class="bg-light p-3 rounded-3 border border-light shadow-sm">
+                            <h6 class="fw-bold mb-3 text-dark d-flex align-items-center gap-2">
+                                <i class="bi bi-clock text-primary"></i> Horaires
+                            </h6>
+                            <ul class="list-unstyled small text-secondary mb-0 d-flex flex-column gap-1">
+                                <li class="d-flex justify-content-between"><span>Lun</span> <span>8:30-12 | 14-17</span></li>
+                                <li class="d-flex justify-content-between"><span>Mar</span> <span>8:30-12 | 14-18</span></li>
+                                <li class="d-flex justify-content-between text-muted"><span>Mer</span> <span>Fermé</span></li>
+                                <li class="d-flex justify-content-between"><span>Jeu</span> <span>8:30-12 | 14-17:30</span></li>
+                                <li class="d-flex justify-content-between"><span>Ven</span> <span>8:30-12 | 14-17:30</span></li>
+                                <li class="d-flex justify-content-between"><span>Sam</span> <span>8:30-12:00</span></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Section inférieure -->
-            <div class="border-t border-gray-200 bg-gray-50">
-                <div class="container mx-auto px-4 py-6">
-                    <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                        <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-gray-600">
-                            <p>© {% now "Y" %} Mairie d'Ons-en-Bray. Tous droits réservés.</p>
-                            <div class="flex items-center space-x-4">
-                                <a href="/mentions-legales/" class="hover:text-blue-600 transition-colors">Mentions légales</a>
-                    
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-2 text-xs text-gray-500">
-                            <a href="https://pygab.dev/" target="_blank"><b>Site développé par <span class="text-blue-600">Gabriel Trouvé</span></b></a>
-                        </div>
+            
+            <!-- Bottom -->
+            <div class="bg-primary text-white py-3">
+                <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center small">
+                    <div>&copy; {% now "Y" %} Mairie d'Ons-en-Bray.</div>
+                    <div class="d-flex gap-3 mt-2 mt-md-0">
+                        <a href="/mentions-legales/" class="text-white text-decoration-none opacity-75 hover-opacity-100">Mentions légales</a>
+                        <span class="opacity-50">|</span>
+                        <a href="https://pygab.dev/" target="_blank" class="text-white text-decoration-none opacity-75 hover-opacity-100">Développé par G. Trouvé</a>
                     </div>
                 </div>
             </div>
         </footer>
 
-        {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/project.js' %}"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
         {% block extra_js %}{% endblock %}
-        <!-- 100% privacy-first analytics -->
+        <!-- Analytics -->
     <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
     </body>

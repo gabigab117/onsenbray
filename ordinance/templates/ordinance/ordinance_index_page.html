@@ -3,123 +3,78 @@
 
 {% block content %}
 
-<!-- Contenu principal de la page -->
-<div class="prose-lg mx-auto my-8 text-center">
-    {{ page.body|richtext }}
-</div>
-
-<!-- Section des arrêtés -->
-{% if ordinances %}
-<div class="mt-12">
-    <div class="text-center mb-8">
-        <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+<!-- Header Section -->
+<section class="bg-primary text-white py-5 position-relative overflow-hidden">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.1;">
+        <i class="bi bi-justify display-1 position-absolute" style="right: -2rem; top: -2rem; font-size: 15rem; transform: rotate(15deg);"></i>
     </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-        {% for ordinance in ordinances %}
-        <div class="card bg-white shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200 w-full max-w-sm h-72 flex flex-col">
-            <div class="card-body p-6 flex flex-col h-full">
+    <div class="container position-relative z-1 py-3 text-center">
+        <nav aria-label="breadcrumb" class="mb-3 d-flex justify-content-center">
+            <ol class="breadcrumb mb-0">
+                 <li class="breadcrumb-item"><a href="/" class="text-white text-decoration-none opacity-75">Accueil</a></li>
+                 <li class="breadcrumb-item active text-white" aria-current="page">Arrêtés municipaux</li>
+            </ol>
+        </nav>
+        <h1 class="display-4 fw-bold font-serif mb-0">{{ page.title }}</h1>
+        {% if page.body %}
+        <div class="mt-4 lead opacity-90 mx-auto" style="max-width: 700px;">
+            {{ page.body|richtext }}
+        </div>
+        {% endif %}
+    </div>
+    
+     <div class="position-absolute bottom-0 start-0 w-100" style="height: 32px; background: transparent;">
+        <svg viewBox="0 0 1440 32" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+            <path d="M0 32H1440V0C1440 0 1140 32 720 32C300 32 0 0 0 0V32Z" fill="#f8f9fa"/>
+        </svg>
+    </div>
+</section>
 
-                <!-- En-tête de la card avec icône -->
-                <div class="flex items-start justify-between mb-4 flex-shrink-0">
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                            <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/>
-                            </svg>
+<!-- Ordinances List Section -->
+<section class="py-5 bg-light">
+    <div class="container pb-5">
+        {% if ordinances %}
+        <div class="row row-cols-1 row-cols-lg-2 g-4">
+            {% for ordinance in ordinances %}
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden hover-lift transition-all">
+                    <div class="card-body p-4 d-flex align-items-center">
+                        <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-3 me-3 flex-shrink-0" style="width: 4rem; height: 4rem; display: flex; align-items: center; justify-content: center;">
+                             <i class="bi bi-file-earmark-text fs-4"></i>
                         </div>
-                        <div>
-                            <p class="text-sm text-gray-600">{{ ordinance.title }}</p>
+                        
+                        <div class="flex-grow-1 min-w-0">
+                            <h2 class="h6 fw-bold text-dark mb-1 text-truncate">
+                                {{ ordinance.title }}
+                            </h2>
+                            <div class="d-flex align-items-center text-secondary small">
+                                <span class="bg-light px-2 py-1 rounded me-2 border">{{ ordinance.get_type_display }}</span>
+                                <i class="bi bi-calendar me-1"></i>
+                                {{ ordinance.date|date:"d/m/Y" }}
+                            </div>
+                        </div>
+                        
+                        <div class="ms-3">
+                            <a href="{{ ordinance.document.url }}" target="_blank" class="btn btn-icon btn-outline-primary rounded-circle" title="Télécharger">
+                                <i class="bi bi-download"></i>
+                            </a>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Informations de l'arrêté - zone flexible -->
-                <div class="space-y-2 mb-4 flex-grow">
-                    <div class="flex items-center text-sm text-gray-600">
-                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-                        </svg>
-                        <span class="font-medium">{{ ordinance.date|date:"d/m/Y" }}</span>
-                    </div>
-                    
-                    <div class="flex items-center text-sm text-gray-600">
-                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"/>
-                        </svg>
-                        <span class="font-medium">{{ ordinance.get_type_display }}</span>
-                    </div>
-                    
-                    <div class="flex items-center text-sm text-gray-600">
-                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
-                        </svg>
-                        {% if ordinance.author %}
-                        <span>Publié par {{ ordinance.author.first_name }}</span>
-                        {% else %}
-                        <span>Publié par Admin</span>
-                        {% endif %}
-                    </div>
-                </div>
-                
-                <!-- Action - toujours en bas -->
-                <div class="card-actions justify-end mt-auto flex-shrink-0">
-                    <a href="{{ ordinance.document.url }}" target="_blank" class="btn btn-primary btn-sm">
-                        Ouvrir
-                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                        </svg>
-                    </a>
                 </div>
             </div>
-        </div>
-        {% endfor %}
-    </div>
-
-    <!-- Pagination -->
-    {% if ordinances.has_other_pages %}
-    <div class="flex justify-center mt-12">
-        <nav class="flex items-center space-x-2">
-            {% if ordinances.has_previous %}
-                <a href="?page=1" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
-                    Première
-                </a>
-                <a href="?page={{ ordinances.previous_page_number }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
-                    ‹ Précédente
-                </a>
-            {% endif %}
-
-            {% for num in ordinances.paginator.page_range %}
-                {% if ordinances.number == num %}
-                    <span class="px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded-md">
-                        {{ num }}
-                    </span>
-                {% elif num > ordinances.number|add:'-3' and num < ordinances.number|add:'3' %}
-                    <a href="?page={{ num }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
-                        {{ num }}
-                    </a>
-                {% endif %}
             {% endfor %}
-
-            {% if ordinances.has_next %}
-                <a href="?page={{ ordinances.next_page_number }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
-                    Suivante ›
-                </a>
-                <a href="?page={{ ordinances.paginator.num_pages }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
-                    Dernière
-                </a>
-            {% endif %}
-        </nav>
+        </div>
+        {% else %}
+         <div class="text-center py-5">
+             <div class="bg-white p-5 rounded-4 shadow-sm mx-auto" style="max-width: 500px;">
+                <i class="bi bi-folder-x fs-1 text-muted mb-3 d-block"></i>
+                <h3 class="h5 fw-bold text-dark">Aucun arrêté</h3>
+                <p class="text-secondary mb-0">Aucun document disponible pour le moment.</p>
+            </div>
+        </div>
+        {% endif %}
     </div>
-
-    <!-- Informations de pagination -->
-    <div class="text-center mt-4 text-sm text-gray-600">
-        Page {{ ordinances.number }} sur {{ ordinances.paginator.num_pages }} 
-        ({{ ordinances.paginator.count }} arrêté{{ ordinances.paginator.count|pluralize }} au total)
-    </div>
-    {% endif %}
-
-</div>
-{% endif %}
+</section>
 
 {% endblock content %}
