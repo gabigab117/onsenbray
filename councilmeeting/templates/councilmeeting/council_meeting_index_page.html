@@ -4,65 +4,59 @@
 {% block content %}
 
 <!-- Contenu principal de la page -->
-<div class="prose-lg mx-auto my-8 text-center">
+<div class="lead text-center my-5 mx-auto" style="max-width: 800px;">
     {{ page.body|richtext }}
 </div>
 
 <!-- Section des réunions/meetings -->
 {% if meetings %}
-<div class="mt-12">
-    <div class="text-center mb-8">
-        <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+<div class="my-5">
+    <div class="text-center mb-5">
+        <div class="bg-primary mx-auto rounded-pill" style="width: 6rem; height: 4px;"></div>
     </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for meeting in meetings %}
-        <div class="card bg-white shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200 w-full max-w-sm h-56 flex flex-col">
-            <div class="card-body p-6 flex flex-col h-full">
+        <div class="col">
+            <div class="card h-100 border-light shadow-sm">
+                <div class="card-body p-4 d-flex flex-column">
 
-                <!-- En-tête de la card avec icône -->
-                <div class="flex items-start justify-between mb-4 flex-shrink-0">
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                            <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
-                            </svg>
+                    <!-- En-tête de la card avec icône -->
+                    <div class="d-flex align-items-start justify-content-between mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center me-3" style="width: 2.5rem; height: 2.5rem;">
+                                <i class="bi bi-calendar-event fs-5 text-primary"></i>
+                            </div>
+                            <div>
+                                <p class="small text-secondary mb-0">Compte rendu du :</p>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-sm text-gray-600">Compte rendu du :</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Informations de la réunion - zone flexible -->
-                <div class="space-y-2 mb-4 flex-grow">
-                    <div class="flex items-center text-sm text-gray-600">
-                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-                        </svg>
-                        <span class="font-medium">{{ meeting.date|date:"d/m/Y" }}</span>
                     </div>
                     
-                    <div class="flex items-center text-sm text-gray-600">
-                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
-                        </svg>
-                        {% if meeting.author %}
-                        <span>Publié par {{ meeting.author.first_name }}</span>
-                        {% else %}
-                        <span>Publié par Admin</span>
-                        {% endif %}
+                    <!-- Informations de la réunion - zone flexible -->
+                    <div class="flex-grow-1 mb-3">
+                        <div class="d-flex align-items-center small text-secondary mb-2">
+                            <i class="bi bi-calendar me-2"></i>
+                            <span class="fw-medium">{{ meeting.date|date:"d/m/Y" }}</span>
+                        </div>
+                        
+                        <div class="d-flex align-items-center small text-secondary">
+                            <i class="bi bi-person me-2"></i>
+                            {% if meeting.author %}
+                            <span>Publié par {{ meeting.author.first_name }}</span>
+                            {% else %}
+                            <span>Publié par Admin</span>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Action - toujours en bas -->
-                <div class="card-actions justify-end mt-auto flex-shrink-0">
-                    <a href="{{ meeting.document.url }}" target="_blank" class="btn btn-primary btn-sm">
-                        Ouvrir
-                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                        </svg>
-                    </a>
+                    
+                    <!-- Action - toujours en bas -->
+                    <div class="text-end mt-auto">
+                        <a href="{{ meeting.document.url }}" target="_blank" class="btn btn-primary btn-sm rounded-pill px-3">
+                            Ouvrir
+                            <i class="bi bi-download ms-1"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,42 +65,40 @@
 
     <!-- Pagination -->
     {% if meetings.has_other_pages %}
-    <div class="flex justify-center mt-12">
-        <nav class="flex items-center space-x-2">
-            {% if meetings.has_previous %}
-                <a href="?page=1" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
-                    Première
-                </a>
-                <a href="?page={{ meetings.previous_page_number }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
-                    ‹ Précédente
-                </a>
-            {% endif %}
-
-            {% for num in meetings.paginator.page_range %}
-                {% if meetings.number == num %}
-                    <span class="px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded-md">
-                        {{ num }}
-                    </span>
-                {% elif num > meetings.number|add:'-3' and num < meetings.number|add:'3' %}
-                    <a href="?page={{ num }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
-                        {{ num }}
-                    </a>
+    <div class="d-flex justify-content-center mt-5">
+        <nav aria-label="Pagination">
+            <ul class="pagination">
+                {% if meetings.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">Première</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ meetings.previous_page_number }}">‹ Précédente</a>
+                </li>
                 {% endif %}
-            {% endfor %}
 
-            {% if meetings.has_next %}
-                <a href="?page={{ meetings.next_page_number }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
-                    Suivante ›
-                </a>
-                <a href="?page={{ meetings.paginator.num_pages }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
-                    Dernière
-                </a>
-            {% endif %}
+                {% for num in meetings.paginator.page_range %}
+                    {% if meetings.number == num %}
+                        <li class="page-item active"><span class="page-link bg-primary border-primary">{{ num }}</span></li>
+                    {% elif num > meetings.number|add:'-3' and num < meetings.number|add:'3' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if meetings.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ meetings.next_page_number }}">Suivante ›</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ meetings.paginator.num_pages }}">Dernière</a>
+                </li>
+                {% endif %}
+            </ul>
         </nav>
     </div>
 
     <!-- Informations de pagination -->
-    <div class="text-center mt-4 text-sm text-gray-600">
+    <div class="text-center mt-3 small text-secondary">
         Page {{ meetings.number }} sur {{ meetings.paginator.num_pages }} 
         ({{ meetings.paginator.count }} réunion{{ meetings.paginator.count|pluralize }} au total)
     </div>

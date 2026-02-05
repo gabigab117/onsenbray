@@ -3,81 +3,82 @@
 
 {% block content %}
 
-<div class="max-w-4xl mx-auto">
-    <div class="card bg-white shadow-lg border border-gray-100">
-        <div class="card-body p-8">
+<div class="container">
+    <div class="card border-light shadow-sm">
+        <div class="card-body p-4 p-md-5">
             
             <!-- Métadonnées de l'événement -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 pb-6 border-b border-gray-200">
+            <div class="row g-4 mb-4 pb-4 border-bottom">
                 
                 <!-- Colonne gauche -->
-                <div class="space-y-4">
-                    <div class="flex items-center text-gray-600">
-                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                            <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">Date</p>
-                            <p class="font-medium">{{ page.date|date:"d/m/Y à H:i" }}</p>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center text-secondary">
+                            <div class="bg-primary bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center me-3" style="width: 2.5rem; height: 2.5rem;">
+                                <i class="bi bi-calendar text-primary"></i>
+                            </div>
+                            <div>
+                                <p class="small text-secondary mb-0">Date</p>
+                                <p class="fw-medium mb-0">{{ page.date|date:"d/m/Y à H:i" }}</p>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="flex items-start text-gray-600">
-                        <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3 mt-1">
-                            <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">Localisation</p>
-                            <p class="font-medium">{{ page.localisation }}</p>
+                    <div>
+                        <div class="d-flex align-items-start text-secondary">
+                            <div class="bg-success bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center me-3" style="width: 2.5rem; height: 2.5rem;">
+                                <i class="bi bi-geo-alt text-success"></i>
+                            </div>
+                            <div>
+                                <p class="small text-secondary mb-0">Localisation</p>
+                                <p class="fw-medium mb-0">{{ page.localisation }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Colonne droite -->
-                <div class="space-y-4">
+                <div class="col-md-6">
                     
                     {% if page.organizer %}
-                    <div class="flex items-center text-gray-600">
-                        <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
-                            <svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">Organisateur</p>
-                            <p class="font-medium">{{ page.organizer.name }}</p>
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center text-secondary">
+                            <div class="bg-primary bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center me-3" style="width: 2.5rem; height: 2.5rem;">
+                                <i class="bi bi-person-circle text-primary"></i>
+                            </div>
+                            <div>
+                                <p class="small text-secondary mb-0">Organisateur</p>
+                                <p class="fw-medium mb-0">{{ page.organizer.name }}</p>
+                            </div>
                         </div>
                     </div>
                     {% endif %}
                     
-                    <div class="flex items-center text-gray-600">
-                        <div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
-                            <svg class="w-4 h-4 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">Publié par</p>
-                            <p class="font-medium">{{ page.owner.first_name }}</p>
+                    <div>
+                        <div class="d-flex align-items-center text-secondary">
+                            <div class="bg-warning bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center me-3" style="width: 2.5rem; height: 2.5rem;">
+                                <i class="bi bi-person text-warning"></i>
+                            </div>
+                            <div>
+                                <p class="small text-secondary mb-0">Publié par</p>
+                                <p class="fw-medium mb-0">{{ page.owner.first_name }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
             <!-- Contenu de l'événement -->
-            <div class="prose prose-lg max-w-none mx-auto">
+            <div class="lead">
       
                 {{ page.body }}
      
             </div>
             
             <!-- Lien de retour -->
-            <div class="text-center mt-8 pt-6 border-t border-gray-200">
-                <a href="{{ page.get_parent.url }}" class="btn btn-outline btn-primary">
+            <div class="text-center mt-4 pt-4 border-top">
+                <a href="{{ page.get_parent.url }}" class="btn btn-outline-primary rounded-pill px-4">
+                    <i class="bi bi-arrow-left me-2"></i>
                     Retour aux événements
                 </a>
             </div>

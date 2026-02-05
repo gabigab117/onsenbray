@@ -5,60 +5,53 @@
 
 <!-- Section des menus EN PREMIER -->
 {% if menus %}
-<div class="mb-12">
-    <div class="text-center mb-8">
-        <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+<div class="my-5">
+    <div class="text-center mb-5">
+        <div class="bg-success mx-auto rounded-pill" style="width: 6rem; height: 4px;"></div>
     </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for menu in menus %}
-        <div class="card bg-white shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200 w-full max-w-sm h-56 flex flex-col">
-            <div class="card-body p-6 flex flex-col h-full">
+        <div class="col">
+            <div class="card h-100 border-light shadow-sm">
+                <div class="card-body p-4 d-flex flex-column">
 
-                <!-- En-tête de la card avec icône -->
-                <div class="flex items-start justify-between mb-4 flex-shrink-0">
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
-                            <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
-                            </svg>
+                    <!-- En-tête de la card avec icône -->
+                    <div class="d-flex align-items-start justify-content-between mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-success bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center me-3" style="width: 2.5rem; height: 2.5rem;">
+                                <i class="bi bi-menu-button-wide fs-5 text-success"></i>
+                            </div>
+                            <div>
+                                <p class="small text-secondary mb-0">Menu du :</p>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-sm text-gray-600">Menu du :</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Informations du menu - zone flexible -->
-                <div class="space-y-2 mb-4 flex-grow">
-                    <div class="flex items-center text-sm text-gray-600">
-                        <svg class="w-4 h-4 mr-2 text-gray-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-                        </svg>
-                        <span class="font-medium">{{ menu.date|date:"d/m/Y" }}</span> au <span class="font-medium">{{ menu.end_date|date:"d/m/Y" }}</span>
                     </div>
                     
-                    <div class="flex items-center text-sm text-gray-600">
-                        <svg class="w-4 h-4 mr-2 text-gray-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
-                        </svg>
-                        {% if menu.author %}
-                        <span>Publié par {{ menu.author.first_name }}</span>
-                        {% else %}
-                        <span>Publié par Admin</span>
-                        {% endif %}
+                    <!-- Informations du menu - zone flexible -->
+                    <div class="flex-grow-1 mb-3">
+                        <div class="d-flex align-items-center small text-secondary mb-2">
+                            <i class="bi bi-calendar me-2"></i>
+                            <span class="fw-medium">{{ menu.date|date:"d/m/Y" }}</span> au <span class="fw-medium">{{ menu.end_date|date:"d/m/Y" }}</span>
+                        </div>
+                        
+                        <div class="d-flex align-items-center small text-secondary">
+                            <i class="bi bi-person me-2"></i>
+                            {% if menu.author %}
+                            <span>Publié par {{ menu.author.first_name }}</span>
+                            {% else %}
+                            <span>Publié par Admin</span>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Action - toujours en bas -->
-                <div class="card-actions justify-end mt-auto flex-shrink-0">
-                    <a href="{{ menu.document.url }}" target="_blank" class="btn btn-primary btn-sm">
-                        Voir
-                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 12a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
-                        </svg>
-                    </a>
+                    
+                    <!-- Action - toujours en bas -->
+                    <div class="text-end mt-auto">
+                        <a href="{{ menu.document.url }}" target="_blank" class="btn btn-success btn-sm rounded-pill px-3">
+                            Voir
+                            <i class="bi bi-eye ms-1"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,42 +60,40 @@
 
     <!-- Pagination -->
     {% if menus.has_other_pages %}
-    <div class="flex justify-center mt-12">
-        <nav class="flex items-center space-x-2">
-            {% if menus.has_previous %}
-                <a href="?page=1" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors">
-                    Première
-                </a>
-                <a href="?page={{ menus.previous_page_number }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors">
-                    ‹ Précédente
-                </a>
-            {% endif %}
-
-            {% for num in menus.paginator.page_range %}
-                {% if menus.number == num %}
-                    <span class="px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded-md">
-                        {{ num }}
-                    </span>
-                {% elif num > menus.number|add:'-3' and num < menus.number|add:'3' %}
-                    <a href="?page={{ num }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors">
-                        {{ num }}
-                    </a>
+    <div class="d-flex justify-content-center mt-5">
+        <nav aria-label="Pagination">
+            <ul class="pagination">
+                {% if menus.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">Première</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ menus.previous_page_number }}">‹ Précédente</a>
+                </li>
                 {% endif %}
-            {% endfor %}
 
-            {% if menus.has_next %}
-                <a href="?page={{ menus.next_page_number }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors">
-                    Suivante ›
-                </a>
-                <a href="?page={{ menus.paginator.num_pages }}" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors">
-                    Dernière
-                </a>
-            {% endif %}
+                {% for num in menus.paginator.page_range %}
+                    {% if menus.number == num %}
+                        <li class="page-item active"><span class="page-link bg-success border-success">{{ num }}</span></li>
+                    {% elif num > menus.number|add:'-3' and num < menus.number|add:'3' %}
+                        <li class="page-item"><a class="page-link text-success" href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if menus.has_next %}
+                <li class="page-item">
+                    <a class="page-link text-success" href="?page={{ menus.next_page_number }}">Suivante ›</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link text-success" href="?page={{ menus.paginator.num_pages }}">Dernière</a>
+                </li>
+                {% endif %}
+            </ul>
         </nav>
     </div>
 
     <!-- Informations de pagination -->
-    <div class="text-center mt-4 text-sm text-gray-600">
+    <div class="text-center mt-3 small text-secondary">
         Page {{ menus.number }} sur {{ menus.paginator.num_pages }} 
         ({{ menus.paginator.count }} menu{{ menus.paginator.count|pluralize }} au total)
     </div>
@@ -112,27 +103,25 @@
 
 <!-- Message si aucun menu -->
 {% else %}
-<div class="text-center py-12 mb-12">
-    <div class="max-w-md mx-auto">
-        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
-            </svg>
+<div class="text-center py-5 my-5">
+    <div class="mx-auto" style="max-width: 400px;">
+        <div class="bg-success bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 4rem; height: 4rem;">
+            <i class="bi bi-menu-button-wide fs-3 text-success"></i>
         </div>
-        <h2 class="text-xl font-semibold text-gray-900 mb-2">Aucun menu disponible</h2>
-        <p class="text-gray-600">Les menus de la cantine seront bientôt disponibles ici.</p>
+        <h2 class="h5 fw-bold text-dark mb-2">Aucun menu disponible</h2>
+        <p class="text-secondary">Les menus de la cantine seront bientôt disponibles ici.</p>
     </div>
 </div>
 {% endif %}
 
 <!-- Séparateur visuel -->
 {% if menus %}
-<div class="border-t border-gray-200 my-12"></div>
+<div class="border-top my-5"></div>
 {% endif %}
 
 <!-- Contenu principal de la page EN BAS -->
 {% if page.body %}
-<div class="prose-lg mx-auto text-center">
+<div class="lead text-center mx-auto" style="max-width: 800px;">
     {{ page.body|richtext }}
 </div>
 {% endif %}

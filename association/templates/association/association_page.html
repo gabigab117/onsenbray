@@ -3,18 +3,19 @@
 
 {% block content %}
 
-<div class="max-w-4xl mx-auto">
-    <div class="card bg-white shadow-lg border border-gray-100">
-        <div class="card-body p-8">
+<div class="container">
+    <div class="card border-light shadow-sm">
+        <div class="card-body p-4 p-md-5">
             
             <!-- Contenu de l'article -->
-            <div class="prose prose-lg max-w-none mx-auto">
+            <div class="lead">
                 {{ page.body }}
             </div>
             
             <!-- Lien de retour -->
-            <div class="text-center mt-8 pt-6 border-t border-gray-200">
-                <a href="{{ page.get_parent.url }}" class="btn btn-outline btn-primary">
+            <div class="text-center mt-4 pt-4 border-top">
+                <a href="{{ page.get_parent.url }}" class="btn btn-outline-primary rounded-pill px-4">
+                    <i class="bi bi-arrow-left me-2"></i>
                     Retour à la liste des associations
                 </a>
             </div>

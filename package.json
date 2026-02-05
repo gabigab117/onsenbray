@@ -1,0 +1,27 @@
+{
+  "name": "onsenbray",
+  "version": "1.0.0",
+  "description": "🏛️ **Application web officielle de la commune d'Ons-en-Bray**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "sass project/static/scss/custom-bootstrap.scss project/static/css/bootstrap-custom.css --style compressed",
+    "watch:css": "sass project/static/scss/custom-bootstrap.scss project/static/css/bootstrap-custom.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabigab117/onsenbray.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/gabigab117/onsenbray/issues"
+  },
+  "homepage": "https://github.com/gabigab117/onsenbray#readme",
+  "devDependencies": {
+    "bootstrap": "^5.3.8",
+    "sass": "^1.97.3"
+  }
+}
