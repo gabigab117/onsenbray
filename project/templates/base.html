@@ -224,8 +224,8 @@
                                 <form class="d-flex position-relative" action="{% url 'search' %}" method="get">
                                     <div class="input-group input-group-sm">
                                         <input type="text" name="query" class="form-control rounded-pill ps-3 pe-5 border-secondary-subtle bg-light" placeholder="Rechercher..." aria-label="Rechercher">
-                                        <button class="btn btn-link position-absolute end-0 top-50 translate-middle-y text-secondary pe-3 border-0 text-decoration-none" type="submit">
-                                            <i class="bi bi-search"></i>
+                                        <button class="btn btn-link position-absolute end-0 top-50 translate-middle-y text-secondary pe-3 border-0 text-decoration-none" type="submit" aria-label="Lancer la recherche">
+                                            <i class="bi bi-search" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                 </form>
@@ -258,14 +258,14 @@
                             Commune située dans le département de l'Oise, en région Hauts-de-France.
                         </p>
                         <div class="d-flex gap-2">
-                             <a href="https://fr.wikipedia.org/wiki/Ons-en-Bray" class="btn btn-primary btn-sm rounded-circle"><i class="bi bi-wikipedia"></i></a>
-                             <a href="mailto:mairie@onsenbray.fr" class="btn btn-outline-primary btn-sm rounded-circle"><i class="bi bi-envelope-fill"></i></a>
+                             <a href="https://fr.wikipedia.org/wiki/Ons-en-Bray" class="btn btn-primary btn-sm rounded-circle" aria-label="Page Wikipedia d'Ons-en-Bray"><i class="bi bi-wikipedia" aria-hidden="true"></i></a>
+                             <a href="mailto:mairie@onsenbray.fr" class="btn btn-outline-primary btn-sm rounded-circle" aria-label="Envoyer un email à la mairie"><i class="bi bi-envelope-fill" aria-hidden="true"></i></a>
                         </div>
                     </div>
                     
                     <!-- Quick Links -->
                     <div class="col-6 col-lg-2">
-                        <h6 class="fw-bold mb-3 text-dark">Accès rapide</h6>
+                        <div class="fw-bold mb-3 text-dark">Accès rapide</div>
                         <ul class="list-unstyled d-flex flex-column gap-2 text-secondary small">
                             <li><a href="{% slugurl 'la-mairie' %}" class="text-decoration-none text-reset">La Mairie</a></li>
                             <li><a href="{% slugurl 'actualites' %}" class="text-decoration-none text-reset">Actualités</a></li>
@@ -276,7 +276,7 @@
 
                     <!-- Contact -->
                     <div class="col-6 col-lg-3">
-                        <h6 class="fw-bold mb-3 text-dark">Contact</h6>
+                        <div class="fw-bold mb-3 text-dark">Contact</div>
                         <ul class="list-unstyled d-flex flex-column gap-3 text-secondary small">
                            <li class="d-flex gap-2">
                                <i class="bi bi-geo-alt-fill text-primary"></i>
@@ -296,9 +296,9 @@
                     <!-- Horaires -->
                     <div class="col-lg-3">
                         <div class="bg-light p-3 rounded-3 border border-light shadow-sm">
-                            <h6 class="fw-bold mb-3 text-dark d-flex align-items-center gap-2">
-                                <i class="bi bi-clock text-primary"></i> Horaires
-                            </h6>
+                            <div class="fw-bold mb-3 text-dark d-flex align-items-center gap-2">
+                                <i class="bi bi-clock text-primary" aria-hidden="true"></i> Horaires
+                            </div>
                             <ul class="list-unstyled small text-secondary mb-0 d-flex flex-column gap-1">
                                 <li class="d-flex justify-content-between"><span>Lun</span> <span>8:30-12 | 14-17</span></li>
                                 <li class="d-flex justify-content-between"><span>Mar</span> <span>8:30-12 | 14-18</span></li>
