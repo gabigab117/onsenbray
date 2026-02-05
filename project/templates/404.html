@@ -1,11 +1,82 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Page not found{% endblock %}
+{% block title %}Page non trouvée - 404{% endblock %}
 
 {% block body_class %}template-404{% endblock %}
 
 {% block content %}
-<h1>Page non trouvée</h1>
 
-<h2>Désolé, cette page est introuvable.</h2>
+<!-- Header Section -->
+<section class="bg-primary text-white py-5 position-relative overflow-hidden">
+    <!-- Abstract Background -->
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.1;">
+        <i class="bi bi-exclamation-triangle display-1 position-absolute" style="right: -5%; top: 20%; font-size: 20rem; transform: rotate(15deg);"></i>
+    </div>
+    
+    <div class="container position-relative z-1 py-5 text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="display-1 fw-bold mb-4" style="font-size: 8rem; line-height: 1;">404</div>
+                <h1 class="display-5 fw-bold font-serif mb-4">Page non trouvée</h1>
+                <p class="lead opacity-90">
+                    Désolé, la page que vous recherchez semble introuvable.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Wave Bottom -->
+    <div class="position-absolute bottom-0 start-0 w-100" style="height: 48px; background: transparent;">
+        <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+            <path d="M0 48H1440V0C1440 0 1140 48 720 48C300 48 0 0 0 0V48Z" fill="#f8f9fa"/>
+        </svg>
+    </div>
+</section>
+
+<!-- Content Section -->
+<section class="py-5 bg-light">
+    <div class="container position-relative z-2" style="margin-top: -4rem;">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="bg-white p-5 rounded-4 shadow-sm border border-light text-center">
+                    <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-4" style="width: 5rem; height: 5rem;">
+                        <i class="bi bi-search fs-1"></i>
+                    </div>
+                    
+                    <h2 class="h4 fw-bold text-dark mb-3">Que cherchez-vous ?</h2>
+                    <p class="text-secondary mb-4">
+                        La page demandée a peut-être été déplacée ou n'existe plus. Voici quelques liens utiles :
+                    </p>
+                    
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <a href="/" class="btn btn-primary w-100 rounded-pill py-3">
+                                <i class="bi bi-house-door me-2"></i>
+                                Retour à l'accueil
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{% url 'search' %}" class="btn btn-outline-primary w-100 rounded-pill py-3">
+                                <i class="bi bi-search me-2"></i>
+                                Rechercher
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="border-top border-light pt-4 mt-4">
+                        <p class="small text-muted mb-3">Accès rapides :</p>
+                        <div class="d-flex flex-wrap gap-2 justify-content-center">
+                            <a href="{% url 'wagtailadmin_home' %}" class="btn btn-sm btn-light rounded-pill">La Mairie</a>
+                            <a href="/actualites/" class="btn btn-sm btn-light rounded-pill">Actualités</a>
+                            <a href="/evenements/" class="btn btn-sm btn-light rounded-pill">Agenda</a>
+                            <a href="/associations/" class="btn btn-sm btn-light rounded-pill">Associations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
