@@ -4,6 +4,7 @@ from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
 from ordinance.models import Ordinance
 from councilmeeting.models import CouncilMeeting
 from school.models import CanteenMenu
+from photocomparison.models import PhotoComparison
 
 
 class OrdinanceViewSet(SnippetViewSet):
@@ -48,5 +49,22 @@ class CanteenMenuPageViewSetGroup(SnippetViewSetGroup):
     menu_name = "canteen_menu_page_group"
 
 
+class PhotoComparisonViewSet(SnippetViewSet):
+    model = PhotoComparison
+    icon = "image"
+    menu_label = "Comparaisons de photos"
+    menu_name = "photo_comparison"
+    list_display = ["title", "order"]
+    list_per_page = 20
+
+
+class PhotoComparisonViewSetGroup(SnippetViewSetGroup):
+    items = (PhotoComparisonViewSet,)
+    menu_icon = "image"
+    menu_label = "Comparaisons de photos"
+    menu_name = "photo_comparison_group"
+
+
 register_snippet(OrdinanceCouncilViewSetGroup)
 register_snippet(CanteenMenuPageViewSetGroup)
+register_snippet(PhotoComparisonViewSetGroup)

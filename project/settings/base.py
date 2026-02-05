@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     "event",
     "school",
     "association",
+    "photocomparison",
 ]
 
 MIDDLEWARE = [
