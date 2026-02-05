@@ -1,151 +1,235 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags static %}
 
 {% block content %}
 
-<!-- Body Content -->
-<div class="lead text-center my-5 mx-auto" style="max-width: 800px;">
-    {{ page.body|richtext }}
-</div>
-
-<!-- Section Actualités et Événements récents -->
-{% if last_news or last_event %}
-<div class="my-5 py-4">
-    <!-- Titre de section -->
-    <div class="text-center mb-5">
-        <h2 class="display-6 fw-bold text-dark mb-4">Actualités & Événements</h2>
-        <div class="bg-primary mx-auto rounded-pill mb-3" style="width: 6rem; height: 4px;"></div>
-        <p class="text-secondary">Restez informé des dernières nouvelles et événements de la commune</p>
+<!-- Hero Section -->
+<section class="position-relative overflow-hidden bg-primary text-white py-5">
+    <!-- Abstract Decoration Background -->
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.1; overflow: hidden;">
+        <!-- Using the blason or abstract shapes can enhance this -->
+        <img src="{% static 'assets/Blason_ville_fr_oise_ons_en_bray.svg' %}" alt="" style="position: absolute; right: -5%; top: -10%; height: 120%; filter: grayscale(100%) brightness(200%); transform: rotate(15deg);">
     </div>
 
-    <!-- Grille des cartes -->
-    <div class="row row-cols-1 row-cols-lg-2 g-4 mx-auto" style="max-width: 1140px;">
-        
-        <!-- Dernière Actualité -->
-        {% if last_news %}
-        <div class="col">
-            <div class="card h-100 border-light shadow-sm">
-                <div class="card-body p-4 d-flex flex-column">
-                    <!-- En-tête -->
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="bg-primary bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center p-2" style="width: 3rem; height: 3rem;">
-                                <i class="bi bi-newspaper fs-4 text-primary"></i>
-                            </div>
-                            <div>
-                                <span class="badge bg-primary mb-1">Actualité</span>
-                                <p class="small text-secondary mb-0">Dernière publication</p>
-                            </div>
-                        </div>
+    <div class="container position-relative z-2 py-4 py-md-5">
+        <div class="row align-items-center">
+            <div class="col-lg-7 text-center text-lg-start mb-5 mb-lg-0">
+                <div class="d-inline-block border border-white border-opacity-25 rounded-pill px-3 py-1 mb-3 small bg-white bg-opacity-10 backdrop-blur">
+                    👋 Bienvenue sur le site officiel
+                </div>
+                <h1 class="display-3 fw-bold mb-4 font-serif">Mairie d'<br>Ons-en-Bray</h1>
+                <p class="lead mb-4 text-white opacity-90" style="max-width: 600px;">
+                    Retrouvez toutes les informations pratiques, les actualités et l'agenda de votre commune en un clic.
+                </p>
+                <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                    <a href="#actu-agenda" class="btn btn-light rounded-pill px-4 fw-semibold text-primary">
+                        Actualités & Agenda
+                    </a>
+                    <a href="{% slugurl 'la-mairie' %}" class="btn btn-outline-light rounded-pill px-4">
+                        Découvrir la mairie
+                    </a>
+                </div>
+            </div>
+            <!-- Interactive Tiles -->
+            <div class="col-lg-5 ps-lg-5">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <a href="{% slugurl 'citoyennete-et-demarches' %}" class="card h-100 border-0 bg-white bg-opacity-10 hover-lift text-decoration-none text-white p-3 p-md-4 text-center backdrop-blur rounded-4">
+                            <i class="bi bi-file-earmark-text fs-2 mb-2 d-block opacity-75"></i>
+                            <span class="fw-semibold">Démarches</span>
+                        </a>
                     </div>
-                    
-                    <!-- Titre -->
-                    <h3 class="card-title h5 fw-bold text-dark mb-3">
-                        {{ last_news.title }}
-                    </h3>
-                    
-                    
-                    <!-- Métadonnées -->
-                    <div class="d-flex align-items-center gap-4 text-secondary small mb-4 mt-auto">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-calendar"></i>
-                            <span>{{ last_news.date|date:"d/m/Y" }}</span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-person"></i>
-                            <span>{{ last_news.owner }}</span>
-                        </div>
+                    <div class="col-6">
+                         <a href="{% slugurl 'collecte-des-dechets' %}" class="card h-100 border-0 bg-white bg-opacity-10 hover-lift text-decoration-none text-white p-3 p-md-4 text-center backdrop-blur rounded-4">
+                            <i class="bi bi-trash fs-2 mb-2 d-block opacity-75"></i>
+                            <span class="fw-semibold">Déchets</span>
+                        </a>
                     </div>
-                    
-                    <!-- Action -->
-                    <div class="text-end">
-                        <a href="{% pageurl last_news %}" class="btn btn-primary btn-sm rounded-pill px-3">
-                            Lire
-                            <i class="bi bi-arrow-right ms-1"></i>
+                    <div class="col-6">
+                         <a href="{% slugurl 'ecole' %}" class="card h-100 border-0 bg-white bg-opacity-10 hover-lift text-decoration-none text-white p-3 p-md-4 text-center backdrop-blur rounded-4">
+                            <i class="bi bi-mortarboard fs-2 mb-2 d-block opacity-75"></i>
+                            <span class="fw-semibold">École</span>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                         <a href="{% slugurl 'artisans-commerçants-et-entreprises' %}" class="card h-100 border-0 bg-white bg-opacity-10 hover-lift text-decoration-none text-white p-3 p-md-4 text-center backdrop-blur rounded-4">
+                            <i class="bi bi-shop fs-2 mb-2 d-block opacity-75"></i>
+                            <span class="fw-semibold">Artisans</span>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-        {% endif %}
+    </div>
+    
+    <!-- Wave Bottom -->
+    <div class="position-absolute bottom-0 start-0 w-100" style="height: 48px; background: transparent;">
+        <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+            <path d="M0 48H1440V0C1440 0 1140 48 720 48C300 48 0 0 0 0V48Z" fill="#f8f9fa"/>
+        </svg>
+    </div>
+</section>
 
-        <!-- Dernier Événement -->
-        {% if last_event %}
-        <div class="col">
-            <div class="card h-100 border-light shadow-sm">
-                <div class="card-body p-4 d-flex flex-column">
-                    <!-- En-tête -->
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="bg-success bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center p-2" style="width: 3rem; height: 3rem;">
-                                <i class="bi bi-calendar-event fs-4 text-success"></i>
-                            </div>
-                            <div>
-                                <span class="badge bg-success mb-1">Événement</span>
-                                <p class="small text-secondary mb-0">Prochain événement</p>
-                            </div>
-                        </div>
+
+<!-- Content (Editorial/Mot du maire) -->
+{% if page.body %}
+<section class="py-5 bg-white">
+    <div class="container py-lg-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center position-relative">
+                <div class="position-relative z-1">
+                    <div class="rich-text-content lead text-secondary lh-lg mb-4">
+                        {{ page.body|richtext }}
                     </div>
-                    
-                    <!-- Titre -->
-                    <h3 class="card-title h5 fw-bold text-dark mb-3">
-                        {{ last_event.title }}
-                    </h3>
-                    
-                    
-                    <!-- Métadonnées -->
-                    <div class="d-flex align-items-center gap-4 text-secondary small mb-4 mt-auto">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-calendar"></i>
-                            <span>{{ last_event.date|date:"d/m/Y" }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- News & Events Section -->
+<section id="actu-agenda" class="py-5 bg-light border-top border-bottom border-light position-relative">
+    <div class="container py-4">
+        <!-- Section Header -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5 gap-3">
+             <div class="text-center text-md-start">
+                 <h2 class="display-6 fw-bold font-serif text-dark mb-1">Actualités & Agenda</h2>
+                 <p class="text-secondary mb-0">Restez informé de la vie de la commune</p>
+             </div>
+             <a href="{% slugurl 'actualites' %}" class="btn btn-white bg-white border shadow-sm rounded-pill hover-lift btn-sm px-4 fw-medium text-primary">
+                 Tout voir <i class="bi bi-arrow-right ms-1"></i>
+             </a>
+        </div>
+
+        {% if last_news or last_event %}
+        <div class="row g-4">
+            <!-- News Card -->
+             {% if last_news %}
+            <div class="col-lg-6">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative hover-lift transition-all bg-white">
+                     <div class="card-body p-4 d-flex flex-column">
+                         <div class="d-flex justify-content-between align-items-center mb-4">
+                            <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2">Actualité</span>
+                            <small class="text-muted d-flex align-items-center gap-2">
+                                <i class="bi bi-calendar"></i>
+                                {{ last_news.date|date:"d/m/Y" }}
+                            </small>
                         </div>
                         
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-geo-alt"></i>
-                            <span>{{ last_event.localisation }}</span>
+                        <h3 class="h4 fw-bold font-serif mb-3">
+                            <a href="{% pageurl last_news %}" class="text-dark text-decoration-none stretched-link">
+                                {{ last_news.title }}
+                            </a>
+                        </h3>
+                        
+                        <div class="mt-auto pt-4 border-top border-light d-flex align-items-center justify-content-between">
+                             <div class="d-flex align-items-center gap-2 text-secondary small">
+                                 <i class="bi bi-person-circle"></i> {{ last_news.owner }}
+                             </div>
+                             <span class="text-primary fw-medium small group-hover-translate-x transition-transform">
+                                Lire <i class="bi bi-arrow-right ms-1"></i>
+                             </span>
                         </div>
-                    </div>
-                    
-                    <!-- Action -->
-                    <div class="text-end">
-                        <a href="{% pageurl last_event %}" class="btn btn-success btn-sm rounded-pill px-3">
-                            Voir l'événement
-                            <i class="bi bi-arrow-right ms-1"></i>
-                        </a>
-                    </div>
+                     </div>
                 </div>
             </div>
+            {% endif %}
+
+            <!-- Event Card -->
+            {% if last_event %}
+            <div class="col-lg-6">
+                 <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative hover-lift transition-all bg-white">
+                     <div class="card-body p-4 d-flex flex-column">
+                         <div class="d-flex justify-content-between align-items-center mb-4">
+                            <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-2">Agenda</span>
+                            <small class="text-muted d-flex align-items-center gap-2">
+                                <i class="bi bi-calendar-event"></i>
+                                {{ last_event.date|date:"d/m/Y" }}
+                            </small>
+                        </div>
+                        
+                        <h3 class="h4 fw-bold font-serif mb-3">
+                            <a href="{% pageurl last_event %}" class="text-dark text-decoration-none stretched-link">
+                                {{ last_event.title }}
+                            </a>
+                        </h3>
+
+                        {% if last_event.localisation %}
+                        <div class="mb-3 text-secondary small d-flex align-items-center gap-2">
+                            <i class="bi bi-geo-alt-fill text-danger opacity-75"></i>
+                            {{ last_event.localisation }}
+                        </div>
+                        {% endif %}
+                        
+                        <div class="mt-auto pt-4 border-top border-light d-flex align-items-center justify-content-between">
+                             <div class="d-flex align-items-center gap-2 text-secondary small">
+                                 <span class="status-indicator bg-success rounded-circle" style="width: 8px; height: 8px;"></span> À venir
+                             </div>
+                             <span class="text-success fw-medium small">
+                                Détails <i class="bi bi-arrow-right ms-1"></i>
+                             </span>
+                        </div>
+                     </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% else %}
+         <div class="text-center py-5">
+             <div class="d-inline-flex bg-white rounded-circle p-3 shadow-sm mb-3 text-muted">
+                 <i class="bi bi-inbox fs-4"></i>
+             </div>
+             <p class="text-muted mb-0">Aucune actualité récente à afficher.</p>
         </div>
         {% endif %}
     </div>
+</section>
 
-    <!-- Liens vers toutes les actualités et événements -->
-    <div class="text-center mt-5">
-        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-            <a href="{% slugurl 'actualites' %}" class="btn btn-outline-primary rounded-pill px-4">
-                <i class="bi bi-newspaper me-2"></i>
-                Toutes les actualités
-            </a>
-            <a href="{% slugurl 'evenements' %}" class="btn btn-outline-success rounded-pill px-4">
-                <i class="bi bi-calendar-event me-2"></i>
-                Tous les événements
-            </a>
+<!-- Features Grid -->
+<section class="py-5 bg-white border-top border-light">
+    <div class="container">
+        <div class="text-center mb-5">
+             <span class="text-primary fw-bold text-uppercase small tracking-wide">Au quotidien</span>
+             <h2 class="h3 fw-bold font-serif mb-0">Services & Vie locale</h2>
+        </div>
+        
+        <div class="row row-cols-2 row-cols-md-4 g-4 text-center">
+             <div class="col">
+                 <a href="{% slugurl 'associations' %}" class="d-block p-4 rounded-4 bg-light text-decoration-none h-100 hover-lift transition-all">
+                     <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center shadow-sm mb-3 text-primary" style="width: 4.5rem; height: 4.5rem;">
+                        <i class="bi bi-people fs-3"></i>
+                     </div>
+                     <h4 class="h6 fw-bold text-dark mb-0">Associations</h4>
+                 </a>
+             </div>
+             <div class="col">
+                 <a href="{% slugurl 'location-des-salles' %}" class="d-block p-4 rounded-4 bg-light text-decoration-none h-100 hover-lift transition-all">
+                      <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center shadow-sm mb-3 text-primary" style="width: 4.5rem; height: 4.5rem;">
+                        <i class="bi bi-house-door fs-3"></i>
+                     </div>
+                     <h4 class="h6 fw-bold text-dark mb-0">Salles</h4>
+                 </a>
+             </div>
+             <div class="col">
+                 <a href="{% slugurl 'medical' %}" class="d-block p-4 rounded-4 bg-light text-decoration-none h-100 hover-lift transition-all">
+                      <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center shadow-sm mb-3 text-primary" style="width: 4.5rem; height: 4.5rem;">
+                        <i class="bi bi-heart-pulse fs-3"></i>
+                     </div>
+                     <h4 class="h6 fw-bold text-dark mb-0">Santé</h4>
+                 </a>
+             </div>
+             <div class="col">
+                 <a href="{% slugurl 'numeros-utiles' %}" class="d-block p-4 rounded-4 bg-light text-decoration-none h-100 hover-lift transition-all">
+                      <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center shadow-sm mb-3 text-primary" style="width: 4.5rem; height: 4.5rem;">
+                        <i class="bi bi-telephone fs-3"></i>
+                     </div>
+                     <h4 class="h6 fw-bold text-dark mb-0">Numéros Utiles</h4>
+                 </a>
+             </div>
         </div>
     </div>
-</div>
-
-<!-- Message si aucun contenu -->
-{% else %}
-<div class="text-center py-5 my-5">
-    <div class="mx-auto" style="max-width: 400px;">
-        <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 4rem; height: 4rem;">
-            <i class="bi bi-info-circle fs-3 text-secondary"></i>
-        </div>
-        <h3 class="h5 fw-bold text-dark mb-2">Aucun contenu récent</h3>
-        <p class="text-secondary">Les actualités et événements apparaîtront ici dès leur publication.</p>
-    </div>
-</div>
-{% endif %}
+</section>
 
 {% endblock content %}
