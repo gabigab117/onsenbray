@@ -9,6 +9,7 @@ from wagtail.fields import StreamField
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from django.core.paginator import Paginator
+from django.db.models.functions import TruncMonth
 
 
 class EventIndexPage(Page):
@@ -24,7 +25,9 @@ class EventIndexPage(Page):
     
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        events = EventPage.objects.live().order_by('-date')
+        events = EventPage.objects.live().annotate(
+            month=TruncMonth('date')
+        ).order_by('-month', 'date')
 
         paginator = Paginator(events, 10)
         page_number = request.GET.get('page')
