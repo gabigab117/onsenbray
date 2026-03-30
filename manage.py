@@ -2,8 +2,8 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-import environ
 
+import environ
 
 env= environ.Env()
 
@@ -12,7 +12,10 @@ environ.Env.read_env(".env")
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", env("DJANGO_SETTINGS_MODULE"))
+    if "test" in sys.argv:
+        os.environ["DJANGO_SETTINGS_MODULE"] = "project.settings.test"
+    else:
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", env("DJANGO_SETTINGS_MODULE"))
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
