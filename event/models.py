@@ -1,15 +1,14 @@
+from django.core.paginator import Paginator
 from django.db import models
-from wagtail.models import Page
+from django.db.models.functions import TruncMonth
 from wagtail.admin.panels import FieldPanel
-from wagtail.fields import RichTextField
 from wagtail.blocks import RichTextBlock
-from wagtail.images.blocks import ImageChooserBlock
 from wagtail.documents.blocks import DocumentChooserBlock
-from wagtail.fields import StreamField
+from wagtail.fields import RichTextField, StreamField
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.models import Page
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
-from django.core.paginator import Paginator
-from django.db.models.functions import TruncMonth
 
 
 class EventIndexPage(Page):

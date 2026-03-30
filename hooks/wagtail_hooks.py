@@ -1,8 +1,8 @@
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
 
-from ordinance.models import Ordinance
 from councilmeeting.models import CouncilMeeting
+from ordinance.models import Ordinance
 from school.models import CanteenMenu
 
 

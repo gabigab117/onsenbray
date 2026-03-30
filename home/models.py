@@ -1,5 +1,6 @@
-from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
+from wagtail.models import Page
+
 from core.models import BasePage
 from event.models import EventPage
 from news.models import NewsPage

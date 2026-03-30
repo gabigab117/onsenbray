@@ -1,6 +1,5 @@
 from .base import *
 
-
 # SECURITY WARNING: define the correct hosts in production!
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["localhost", "127.0.0.1"])
 

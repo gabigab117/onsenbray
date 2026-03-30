@@ -1,10 +1,9 @@
-from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
-from wagtail.models import Page
+from django.db import models
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField
-
+from wagtail.models import Page
 
 User = get_user_model()
 

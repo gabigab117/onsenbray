@@ -1,6 +1,5 @@
 from .base import *
 
-
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 # HTTPS settings
