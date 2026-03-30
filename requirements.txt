@@ -23,6 +23,7 @@ openpyxl==3.1.5
 pillow==11.2.1
 pillow_heif==0.21.0
 requests==2.32.4
+ruff==0.15.8
 soupsieve==2.7
 sqlparse==0.5.3
 telepath==0.3.1
