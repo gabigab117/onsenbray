@@ -197,3 +197,4 @@ AUTH_USER_MODEL = 'account.CustomUser'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
+OPENWEATHER_API_KEY = env('OPENWEATHER_API_KEY')

@@ -1,0 +1,115 @@
+{% load static wagtailcore_tags %}
+
+<!-- Header / Navbar -->
+<header class="bg-white shadow-sm sticky-top z-3">
+    <nav class="navbar navbar-expand-xl navbar-light py-2">
+        <div class="container">
+            <!-- Logo & Brand -->
+            <a class="navbar-brand d-flex align-items-center gap-3 text-decoration-none me-4" href="/">
+                <img src="{% static 'assets/Blason_ville_fr_oise_ons_en_bray.svg' %}"
+                     alt="Blason Ons-en-Bray"
+                     style="width: 3.5rem; height: 3.5rem;"
+                     class="d-inline-block align-text-top"
+                >
+                <div class="d-flex flex-column lh-1">
+                    <span class="fs-4 fw-bold text-primary heading-font">
+                        Ons-en-Bray
+                    </span>
+                    <span class="small text-uppercase tracking-wider text-muted fw-bold" style="letter-spacing: 1px; font-size: 0.65rem;">Site Officiel</span>
+                </div>
+            </a>
+
+            <!-- Mobile Toggler -->
+            <button class="navbar-toggler border-0 shadow-none p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <div class="p-2">
+                     <span class="navbar-toggler-icon"></span>
+                </div>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header border-bottom">
+                    <h5 class="offcanvas-title fw-bold font-serif" id="offcanvasNavbarLabel">Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-center flex-grow-1 gap-1">
+                        <!-- MAIRIE -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Mairie
+                            </a>
+                            <ul class="dropdown-menu border-0 shadow-lg rounded-3 mt-2">
+                                <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'la-mairie' %}">La Mairie</a></li>
+                                <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'comptes-rendus-des-conseils-municipaux' %}">Comptes rendus conseils municipaux</a></li>
+                                <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'arretes-municipaux-et-prefectoraux' %}">Arrêtés municipaux et préfectoraux</a></li>
+                                <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'citoyennete-et-demarches' %}">Citoyenneté / démarches</a></li>
+                            </ul>
+                        </li>
+                        <!-- LE VILLAGE -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Village
+                            </a>
+                            <ul class="dropdown-menu border-0 shadow-lg rounded-3 mt-2">
+                                <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'le-village' %}">Le village</a></li>
+                                <li><a class="dropdown-item py-2 px-3" href="https://www.ot-paysdebray.fr/fr/" target="_blank">À visiter</a></li>
+                            </ul>
+                        </li>
+                        <!-- ACTUALITÉS & ÉVÉNEMENTS -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Actualités & Événements
+                            </a>
+                            <ul class="dropdown-menu border-0 shadow-lg rounded-3 mt-2">
+                                <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'actualites' %}">Actualités</a></li>
+                                <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'evenements' %}">Événements</a></li>
+                            </ul>
+                        </li>
+                        <!-- VIE LOCALE -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Vie Locale
+                            </a>
+                            <ul class="dropdown-menu border-0 shadow-lg rounded-3 mt-2">
+                                <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'ecole' %}">École</a></li>
+                                <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'associations' %}">Associations</a></li>
+                                <li><a class="dropdown-item py-2 px-3" href="https://espacefamille.aiga.fr/index.html?dossier=11698905#connexion&152640" target="_blank">Accueil Loisirs</a></li>
+                                <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'location-des-salles' %}">Location des salles</a></li>
+                            </ul>
+                        </li>
+                        <!-- SERVICES & INFOS -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Services & Infos
+                            </a>
+                            <ul class="dropdown-menu border-0 shadow-lg rounded-3 mt-2">
+                                <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'medical' %}">Médical</a></li>
+                                <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'artisans-commerçants-et-entreprises' %}">Artisans</a></li>
+                                <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'collecte-des-dechets' %}">Collecte des déchets</a></li>
+                                <li><a class="dropdown-item py-2 px-3" href="{% slugurl 'numeros-utiles' %}">Numéros utiles</a></li>
+                            </ul>
+                        </li>
+                        <!-- CC -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://cc-paysdebray.com/" target="_blank">Communauté de Communes</a>
+                        </li>
+                    </ul>
+
+                    <!-- Actions -->
+                    <div class="d-flex align-items-center gap-3 mt-3 mt-xl-0 ms-xl-4">
+                        <!-- Search -->
+                        <form class="d-flex position-relative" action="{% url 'search' %}" method="get">
+                            <div class="input-group input-group-sm">
+                                <input type="text" name="query" class="form-control rounded-pill ps-3 pe-5 border-secondary-subtle bg-light" placeholder="Rechercher..." aria-label="Rechercher">
+                                <button class="btn btn-link position-absolute end-0 top-50 translate-middle-y text-secondary pe-3 border-0 text-decoration-none" type="submit" aria-label="Lancer la recherche">
+                                    <i class="bi bi-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

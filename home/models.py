@@ -2,6 +2,7 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.models import Page
 
 from core.models import BasePage
+from core.weather import get_current_weather
 from event.models import EventPage
 from news.models import NewsPage
 
@@ -20,4 +21,5 @@ class HomePage(BasePage):
         context['last_event'] = last_event
         last_news = NewsPage.objects.order_by('-date').first()
         context['last_news'] = last_news
+        context['weather'] = get_current_weather()
         return context
